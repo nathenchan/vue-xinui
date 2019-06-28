@@ -16,6 +16,7 @@
 						<li><router-link to="/dialog">Dialog 弹窗</router-link></li>
 						<li><router-link to="/slide_verify">SlideVerify 滑动验证</router-link></li>
 						<li><router-link to="/upload">Upload 上传</router-link></li>
+						<li><router-link to="/ring">Ring 圆环</router-link></li>
 					</ul>
 				</div>
 			</aside>

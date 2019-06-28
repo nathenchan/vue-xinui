@@ -11,6 +11,7 @@ import Dialog from '../components/Dialog.vue'
 import SlideVerify from '../components/SlideVerify.vue'
 import Upload from '../components/Upload.vue'
 import SourceCode from '../components/common/SourcePage.vue'
+import Ring from '../components/Ring.vue'
 
 import xinui from '../../src/index.js'
 // import { XButton } from '../../src/index.js'
@@ -27,7 +28,8 @@ const routes = [
 	{ path:'/loading', component:Loading },
 	{ path:'/dialog', component:Dialog },
 	{ path:'/slide_verify', component:SlideVerify },
-	{ path:'/upload', component:Upload }
+	{ path:'/upload', component:Upload },
+	{ path:'/ring', component:Ring }
 ]
 
 const router = new VueRouter({

@@ -3,12 +3,14 @@ import XButton from '../packages/Button/index.js'
 import Dialog from '../packages/Dialog/index.js'
 import SlideVerify from '../packages/SlideVerify/index.js'
 import Upload from '../packages/Upload/index.js'
+import Ring from '../packages/Ring/index.js'
 
 var components = [
 	XButton,
 	Dialog,
 	SlideVerify,
-	Upload
+	Upload,
+	Ring
 ]
 
 function install(Vue){
