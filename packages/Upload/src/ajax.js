@@ -8,9 +8,9 @@ export default function ({params,file,bar,url,headers}){
 		for( let attr in params ){
 			oForm.append(attr,params[attr])
 		}
-
+		
 		oForm.append('file',file)
-
+		
 		// 进度条设置
 		xhr.upload.onprogress = function(e){
 			let nums = (parseInt(e.loaded / e.total) * 100) + '%'

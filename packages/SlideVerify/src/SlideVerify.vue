@@ -105,7 +105,7 @@
 				pointsX  = 0,
 				rightX = this.imgPosition[this.pictureIndex]['rightX'],
 				pageX = 0
-			
+
 			dragBg.onload = ()=>{
 				this.loadingNum++
 			}
@@ -124,6 +124,10 @@
 				moveFunc = 'touchmove'
 				upFunc = 'touchend'
 
+				// 阻止移动端滑动页面
+				this.$el.addEventListener('touchmove',function(e){
+					e.preventDefault()
+				})
 			}else{
 				
 				downFunc = 'mousedown'

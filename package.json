@@ -2,7 +2,7 @@
   "name": "vue-xinui",
   "version": "1.0.3",
   "description": "",
-  "main": "src/index.js",
+  "main": "dist/xinui.js",
   "scripts": {
     "dev": "webpack-dev-server --config ./build/webpack.dev.js",
     "build": "webpack --config ./build/webpack.build.js"

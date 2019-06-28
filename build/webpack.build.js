@@ -1,12 +1,17 @@
 const path = require('path')
 const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const {VueLoaderPlugin} = require('vue-loader')
 
 module.exports = {
   mode:'development',
   entry:{
     index:'./src/index.js'
+  },
+  output:{
+    path: path.resolve(__dirname, '../dist'),
+    filename: 'xinui.js',
+    library: 'xinui',
+    libraryTarget: 'umd'
   },
   module:{
     rules:[
@@ -24,7 +29,7 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpg|gif|woff2|woff|otf|eot|tff)$/,
-        use: [ 'file-loader' ]
+        use: [ 'file-loader?name=images/[name].[ext]' ]
       }
     ]
   },
