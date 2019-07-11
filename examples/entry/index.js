@@ -12,6 +12,7 @@ import SlideVerify from '../components/SlideVerify.vue'
 import Upload from '../components/Upload.vue'
 import SourceCode from '../components/common/SourcePage.vue'
 import Ring from '../components/Ring.vue'
+import SvgDemo from '../components/SvgDemo.vue'
 
 import xinui from '../../src/index.js'
 // import { XButton } from '../../src/index.js'
@@ -29,7 +30,8 @@ const routes = [
 	{ path:'/dialog', component:Dialog },
 	{ path:'/slide_verify', component:SlideVerify },
 	{ path:'/upload', component:Upload },
-	{ path:'/ring', component:Ring }
+	{ path:'/ring', component:Ring },
+	{ path:'/svg_demo',component:SvgDemo }
 ]
 
 const router = new VueRouter({
