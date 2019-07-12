@@ -1,3 +1,2 @@
 $ cat .gitignore
 node_modules/
-dist/

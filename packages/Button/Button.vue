@@ -20,7 +20,7 @@ export default{
 	},
 	computed:{
 		btnDisabled(){
-			return this.disabled  || undefined
+			return this.disabled  || undefined // undefined则完全不绑定
 		}
 	}
 }

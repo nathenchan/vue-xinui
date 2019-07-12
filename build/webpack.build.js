@@ -1,7 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const {VueLoaderPlugin} = require('vue-loader')
-// const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
@@ -38,44 +38,13 @@ module.exports = {
       }
     ]
   },
-  // optimization: {
-  //   splitChunks: {
-  //       chunks: 'async',
-  //       minSize: 30000,
-  //       maxSize: 0,
-  //       minChunks: 1,
-  //       maxAsyncRequests: 5,
-  //       maxInitialRequests: 3,
-  //       automaticNameDelimiter: '~',
-  //       name: true,
-  //       cacheGroups: {
-  //         vendors: {
-  //         test: /[\\/]node_modules[\\/]/,
-  //         priority: -10
-  //       },
-  //       default: {
-  //         minChunks: 2,
-  //         priority: -20,
-  //         reuseExistingChunk: true
-  //       }
-  //     }
-  //   },
-  //   minimizer: [
-  //     new UglifyJsPlugin({
-  //         cache: true,
-  //         parallel: true,
-  //         sourceMap: true // set to true if you want JS source maps
-  //     }),
-  //     new OptimizeCSSAssetsPlugin({})
-  //     ]
-  // },
   plugins:[
+    new CleanWebpackPlugin(['dist'],{
+      root: path.resolve(__dirname, '../')
+    }),
     new webpack.DefinePlugin({
       prod: JSON.stringify(true)
     }),
-    new VueLoaderPlugin(),
-    // new CleanWebpackPlugin(['dist'],{
-    //   root: path.resolve(__dirname, '../')
-    // })
+    new VueLoaderPlugin()
   ]
 }
