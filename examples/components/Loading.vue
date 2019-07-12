@@ -6,7 +6,7 @@
       <div class="show-page" v-loading="loadingshow" loading-text="loading"></div>
       <source-page :tmpl="directive"></source-page>
     </div>
-
+    
     <div class="demo-pages">
       <h3>全局方法-整页加载</h3>
       <div class="show-page">

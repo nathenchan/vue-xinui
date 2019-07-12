@@ -24,7 +24,7 @@
 	    </div>
 
 	    <div class="demo-pages">
-			<h3>描边动画色彩版</h3>
+			<h3>描边动画-案例2</h3>
 			<div class="show-page">
 				<div class="demo-btn-page">
 					<svg id="show-text" width="100%" height="200">
@@ -41,16 +41,31 @@
 		</div>
 		
 		<div class="demo-pages">
-			<h3>路径动画</h3>
+			<h3>描边动画-案例3</h3>
 			<div class="show-page">
 				<div class="demo-btn-page">
-					<svg width="100%" height="200">
-						<path d="M5 5 50 80 120 50 H170" stroke="#000" stroke-width="5" fill="none" ></path>
-						<circle cx="6" cy="6" r="6" fill="red"></circle>
+					<svg width="100%" height="200" id="cool-btn">
+						<g transform="translate(20 20)">
+							<rect rx="2"  width="200" height="80" stroke="#495397" fill="none" stroke-width="4"></rect>
+							<rect class="rect" rx="2"  width="200" height="80" stroke="#fff" fill="none" stroke-width="4"></rect>
+						</g>
 					</svg>
 				</div>
 			</div>
 		</div>
+
+		<div class="demo-pages">
+			<h3>路径动画</h3>
+			<div class="show-page">
+				<div class="demo-btn-page">
+					<svg width="100%" height="200" id="pathanimation">
+						<path d="M0 80 Q 70 10, 140 70 T 280 70" stroke="#000" stroke-width="1" fill="none" ></path>
+						<circle cx="0" cy="0" r="6" fill="red"></circle>
+					</svg>
+				</div>
+			</div>
+		</div>
+				
 	</div>
 </template>
 
@@ -128,5 +143,31 @@ export default{
     stroke-dasharray:110 500;
 	stroke-dashoffset:-280;
   }
+}
+
+#pathanimation{
+	circle{
+		offset-path: path('M0 80 Q 70 10, 140 70 T 280 70'); 
+		offset-distance: 0%;
+		animation: red-ball 2s linear alternate infinite;
+	}
+}
+@keyframes red-ball { 
+	from { offset-distance: 0%; } 
+	to { offset-distance: 100%; } 
+}
+
+// 
+#cool-btn{
+	background: #000;
+	.rect{
+		stroke-dasharray:560 20;
+		stroke-dashoffset:560;
+		animation:moverect 3s linear infinite;
+	}
+}
+@keyframes moverect{
+	from {stroke-dashoffset:560; } 
+	to { stroke-dashoffset:0; } 
 }
 </style>
