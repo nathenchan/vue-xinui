@@ -65,7 +65,32 @@
 				</div>
 			</div>
 		</div>
-				
+		
+		<div class="demo-pages">
+			<h3>蒙版效果</h3>
+			<div class="show-page">
+				<div class="demo-btn-page">
+					<svg width="100%" height="200" >
+						<defs>
+							<mask id="mask1">
+								<rect x="0" y="0" width="100%" height="200" fill="#fff"></rect>
+								<rect x="50" y="50" width="80" height="90" fill="#000"></rect>
+							</mask>
+						</defs>
+						<rect x="0" y="0" width="100%" height="100%" fill="red" ></rect>
+						<rect x="0" y="0" width="100%" height="100%" fill="blue" mask="url(#mask1)"></rect>
+					</svg>
+					<svg width="100%" height="200" >
+						<defs>
+							<mask id="mask2">
+								<text x="70" y="120" font-size="80" fill="#fff">酷炫</text>
+							</mask>
+						</defs>
+						<image x="0" y="0" height="200"  xlink:href="../images/timg.gif" mask="url(#mask2)" />
+					</svg>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -100,7 +125,7 @@ export default{
 </script>
 
 <style lang="scss">
-#svg-demo-page{
+#show-text{
 	.texts{
 		stroke:#7928a1;
 		stroke-width:4px;
@@ -109,19 +134,19 @@ export default{
 		fill:none;
 		stroke-dasharray:0 400;
 		stroke-dashoffset:0;
-		animation:stroke 1s forwards linear;
+		animation:stroke 1s 1s forwards linear;
 	}
 	.texts:nth-of-type(2){
 		stroke:#007faa;
 		stroke-dasharray:0 400;
 		stroke-dashoffset:0;
-		animation:stroke2 1s forwards linear;
+		animation:stroke2 1s 1s forwards linear;
 	}
 	.texts:nth-of-type(3){
 		stroke:#5e6d82;
 		stroke-dasharray:0 400;
 		stroke-dashoffset:0;
-		animation:stroke3 1s forwards linear;
+		animation:stroke3 1s 1s forwards linear;
 	}
 }
 @keyframes stroke {
