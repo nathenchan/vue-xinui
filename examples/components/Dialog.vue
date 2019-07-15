@@ -81,7 +81,7 @@
 	        </tbody>
 	      </table>
 	    </div>
-		<x-dialog :visible.sync="dialogVisible" :dialogStyle="{width:'30%',top:'10vh',height:'50%',borderRadius:'10px'}" :show-close="true" :mask-click-close="false" title="弹窗标题">
+		<x-dialog :visible.sync="dialogVisible" :dialogStyle="{width:'500px',height:'300px',borderRadius:'10px'}" :show-close="true" :mask-click-close="false" title="弹窗标题">
 			<div class="my-dialog-content">
 				弹窗内容
 			</div>
@@ -94,7 +94,7 @@
 				</div>
 			</div>
 		</x-dialog>
-		<x-dialog :visible.sync="dialogVisible3" :dialogStyle="{width:'20%',height:'200px',top:'10vh',borderRadius:'10px'}" :show-close="true" :mask-click-close="false" title="取消与确认">
+		<x-dialog :visible.sync="dialogVisible3" :dialogStyle="{width:'20%',height:'200px',top:'-100px',borderRadius:'10px'}" :show-close="true" :mask-click-close="false" title="取消与确认">
 			<div class="my-dialog-content">
 				<p>是否删除</p>
 				<div class="clear x-twobtn-page">

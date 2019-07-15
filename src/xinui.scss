@@ -298,9 +298,12 @@
     cursor: pointer;
   }
   .x-dialog{
-    position: relative;
+    position: absolute;
+    left:0;top:0;right:0;bottom:0;
     padding:22px 22px 22px;
-    margin:0 auto;
+    width:300px;
+    height:300px;
+    margin:auto auto;
     background: #fff;
     border-radius:6px;
     box-sizing: border-box;

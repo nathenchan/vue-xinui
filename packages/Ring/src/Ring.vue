@@ -1,6 +1,6 @@
 <template>
 	<div class="x-ring" :style="{width:width+'px',height:height+'px'}">
-		<svg :width="width" :height="height">
+		<svg :width="width" :height="height" >
 			<g>
 				<circle class="x-ring-bg" cx="50%" cy="50%" :r="r" :stroke-width="strokeWidth" :stroke="bgColor" fill="none"></circle>
 				<circle class="x-ring-bar" cx="50%" cy="50%" :r="r" :stroke-width="strokeWidth" :stroke="barColor"  fill="none" :stroke-dasharray="dashArray" :stroke-dashoffset="dashOffset" :stroke-linecap="linecap"></circle>
