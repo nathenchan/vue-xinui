@@ -5,16 +5,15 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
+const entry = require('../src/componets.json')
 
 module.exports = {
-  mode:'production',
-  entry:{
-    index:'./src/index.js'
-  },
+  mode:'production', // development production
+  entry,
   output:{
     path: path.resolve(__dirname, '../dist'),
-    filename: 'xinui.js',
-    library: 'xinui',
+    filename: '[name].js',
+    library: 'xinui', // 暴露库模块到全局
     libraryTarget: 'umd'
   },
   module:{

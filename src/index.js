@@ -21,7 +21,7 @@ function install(Vue){
 }
 
 if( typeof window !== undefined && window.Vue ){
-	install(components)
+	install(window.Vue)
 }
 
 export {
@@ -33,5 +33,6 @@ export {
 
 export default {
 	install,
-	author:'nathen'
+	author:'nathen',
+	version:'1.0.11'
 }
