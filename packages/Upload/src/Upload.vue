@@ -124,3 +124,35 @@
 		}
 	}
 </script>
+
+<style lang="scss">
+.x-upload{
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+  .x-file{
+    display: none;
+  }
+  .x-upload-drag{
+    width:100%;
+    height: 100%;
+    border:1px dashed #bfbfbf;
+    &.active{
+      border:1px solid #007faa;
+    }
+  }
+  .progress{
+    position: absolute;
+    left:0;
+    bottom:0;
+    width:100%;
+    height:4px;
+    .bar{
+      background: #009688;
+        width: 0%;
+        height: 100%;
+    }
+  }
+}
+</style>

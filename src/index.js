@@ -1,14 +1,14 @@
 import Loading from '../packages/Loading/index.js'
 import XButton from '../packages/Button/index.js'
 import Dialog from '../packages/Dialog/index.js'
-import SlideVerify from '../packages/SlideVerify/index.js'
+// import SlideVerify from '../packages/SlideVerify/index.js'
 import Upload from '../packages/Upload/index.js'
 import Ring from '../packages/Ring/index.js'
 
 var components = [
 	XButton,
 	Dialog,
-	SlideVerify,
+	// SlideVerify,
 	Upload,
 	Ring
 ]
@@ -27,12 +27,12 @@ if( typeof window !== undefined && window.Vue ){
 export {
 	XButton,
 	Dialog,
-	SlideVerify,
+	// SlideVerify,
 	Upload
 }
 
 export default {
 	install,
 	author:'nathen',
-	version:'1.0.11'
+	version:'1.0.13'
 }

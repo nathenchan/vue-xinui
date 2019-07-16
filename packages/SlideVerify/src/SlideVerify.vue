@@ -222,3 +222,67 @@
 		}
 	}
 </script>
+
+<style lang="scss">
+
+// 滑动验证
+.picture-puzzle{
+  width:280px;
+  .error{
+    width:30px;
+  }
+  .picture{
+    position: relative;
+    width:100%;
+    height:117px;
+    overflow: hidden;
+  }
+  .dragbg{
+    display: block;
+    width:100%;
+    height:100%;
+  }
+  .dragimg{
+    position: absolute;
+    left:0;
+    top:0;
+    width:50px;
+    cursor: pointer;
+  }
+  .dragverify{
+    position: relative;
+    background:#bfbfbf;
+    width:100%;
+    height: 40px;
+    line-height: 40px;
+    p{
+      font-size: 16px;
+      text-align: center;
+      user-select: none;
+      z-index: 9;
+    }
+    p.errortips{
+      color:#d91e18;
+    }
+  }
+  .dragblock{
+    position: absolute;
+    left:0px;
+    top:0;
+    width:40px;
+    height:40px;
+    line-height: 40px;
+    background:#fff;
+    cursor: pointer;
+    text-align:center;
+    box-sizing: border-box;
+    user-select: none;
+    z-index: 20;
+    border:1px solid #e3e3e3;
+    img{
+      margin-top: 10px;
+      width:22px;
+    }
+  }
+}	
+</style>

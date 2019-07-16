@@ -11,7 +11,7 @@ module.exports = {
   mode:'production', // development production
   entry,
   output:{
-    path: path.resolve(__dirname, '../dist'),
+    path: path.resolve(__dirname, '../lib'),
     filename: '[name].js',
     library: 'xinui', // 暴露库模块到全局
     libraryTarget: 'umd'
@@ -37,13 +37,21 @@ module.exports = {
       }
     ]
   },
+  optimization: {
+    minimizer: [
+      new OptimizeCSSAssetsPlugin({})
+    ]
+  },
   plugins:[
-    new CleanWebpackPlugin(['dist'],{
+    new CleanWebpackPlugin(['lib'],{
       root: path.resolve(__dirname, '../')
     }),
-    new webpack.DefinePlugin({
-      prod: JSON.stringify(true)
+    new MiniCssExtractPlugin({
+      filename: '../lib/theme-chalk/[name].css'
     }),
+    // new webpack.DefinePlugin({
+    //   prod: JSON.stringify(true)
+    // }),
     new VueLoaderPlugin()
   ]
 }

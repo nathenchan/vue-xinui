@@ -54,3 +54,21 @@ export default{
 	}
 }
 </script>
+
+<style lang="scss">
+.x-ring{
+  position: relative;
+}
+.x-ring-bar{
+  transform-origin: 50% 50%;
+  transform:rotate(-90deg);
+  transition:.5s;
+}
+.x-ring-slot{
+  position: absolute;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+}
+</style>

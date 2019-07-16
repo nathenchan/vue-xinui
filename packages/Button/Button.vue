@@ -25,3 +25,16 @@ export default{
 	}
 }
 </script>
+
+<style lang="scss">
+/* x-button */
+.x-button{
+  background:transparent;
+  border:none;
+  text-align: center;
+  cursor: pointer;
+  &.disabled{
+    cursor: not-allowed !important;
+  }
+}
+</style>

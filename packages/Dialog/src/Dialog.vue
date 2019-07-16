@@ -62,3 +62,55 @@
 		}
 	}
 </script>
+
+<style lang="scss">
+/* Dialog */
+.x-dialog-mask{
+  position: fixed;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 99999;
+  .x-closebtn{
+    position: absolute;
+    right:10px;
+    top:0px;
+    width:30px;
+    cursor: pointer;
+  }
+  .x-dialog{
+    position: absolute;
+    left:0;top:0;right:0;bottom:0;
+    padding:22px 22px 22px;
+    width:300px;
+    height:300px;
+    margin:auto auto;
+    background: #fff;
+    border-radius:6px;
+    box-sizing: border-box;
+  }
+  .x-dialog-title{
+    margin:0px 0 20px;
+    text-align: center;
+    font-size: 18px;
+  }
+  .x-one-page{
+    margin:30px auto;
+    width:200px;
+    text-align: center;
+  }
+  .x-twobtn-page{
+    margin:30px auto;
+    width:200px;
+    text-align: center;
+    .x-button:first-of-type{
+      float: left;
+    }
+    .x-button:last-of-type{
+      float: right;
+    }
+  }
+}
+</style>
