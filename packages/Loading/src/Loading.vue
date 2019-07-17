@@ -55,6 +55,7 @@
   width:100%;
   height:100%;
   background:rgba(0,0,0,0.5);
+  z-index: 50;
   .x-loading-text{
     position: absolute;
     top:60%;

@@ -4,12 +4,12 @@
 	      <h3>slideVerify 滑动验证</h3>
 	      <div class="show-page">
 	      	<div class="demo-btn-page">
-	      		<x-slide-verify @finish="success" @error="verifyError" maxerror="3"></x-slide-verify>
+	      		<x-slide-verify @preload="fetchData" @finish="success" @error="verifyError" :maxError="3" :verifyData="slideverifyData" />
 	      	</div>
 	      </div>
 	      <source-page :tmpl="slideVerify"></source-page>
 	    </div>
-	    <div class="demo-pages">
+	    <!-- <div class="demo-pages">
 	      <h3>弹窗形式</h3>
 	      <div class="show-page">
 	      	<div class="demo-btn-page">
@@ -21,7 +21,7 @@
 		
 		<x-dialog :visible.sync="verifyVisible" :dialogStyle="{ width:'50%',top:'10vh' }" title="弹窗形式" >
 			<x-slide-verify @finish="success" @error="verifyError" maxerror="6"></x-slide-verify>
-		</x-dialog>
+		</x-dialog> -->
 		
 	    <div class="api-pages">
 	      <h3>Attributes</h3>
@@ -75,16 +75,32 @@
 </template>
 
 <script>
+	
 	import {slideVerify,slideVerify2} from '../sourcetmp/slideVerify.js'
+	import axios from 'axios'
+
 	export default{
 		data(){
 			return {
 				slideVerify,
 				slideVerify2,
-				verifyVisible:false
+				verifyVisible:false,
+				// 拼图数据
+				slideverifyData:{
+					imgs:{
+						dragImg:'',
+  						dragBg:''
+					},
+					dx:null
+				}
 			}
 		},
 		methods:{
+			fetchData(){ // 获取数据
+				axios.get('http://localhost:8089/slideverify').then(res=>{
+					this.slideverifyData = res.data
+				})
+			},
 			success(){
 				console.log('验证完成')
 			},
