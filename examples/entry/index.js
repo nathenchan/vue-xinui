@@ -13,6 +13,7 @@ import Upload from '../components/Upload.vue'
 import SourceCode from '../components/common/SourcePage.vue'
 import Ring from '../components/Ring.vue'
 import SvgDemo from '../components/SvgDemo.vue'
+import CountDown from '../components/CountDown.vue'
 
 import xinui from '../../src/index.js'
 // import { XButton } from '../../src/index.js'
@@ -31,7 +32,8 @@ const routes = [
 	{ path:'/slide_verify', component:SlideVerify },
 	{ path:'/upload', component:Upload },
 	{ path:'/ring', component:Ring },
-	{ path:'/svg_demo',component:SvgDemo }
+	{ path:'/svg_demo',component:SvgDemo },
+	{ path:'/count_down',component:CountDown }
 ]
 
 const router = new VueRouter({

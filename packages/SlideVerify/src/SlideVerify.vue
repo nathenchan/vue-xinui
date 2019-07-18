@@ -3,7 +3,7 @@
 	<div class="picture-puzzle" v-loading="loadingNum<2">
 		<div class="picture">
 			<img :src="verifyData.imgs.dragBg" class="dragbg" v-show="loadingNum>=2">
-			<img :src="verifyData.imgs.dragImg" class="dragimg" v-show="dragImgShow">
+			<img :src="verifyData.imgs.dragImg" class="dragimg" v-show="dragImgShow" :style="{width:dragImgWidth+'px'}">
 		</div>
 		<div class="dragverify">
 			<div class="dragblock" :class="error ? 'error' : '' "  v-show="dragBlockShow">
@@ -43,7 +43,7 @@
 		props:{
 			maxError:{
 				type:[Number,String],
-				default:15
+				default:8
 			},
 			verifyData:{
 				type: Object,
@@ -53,7 +53,9 @@
 							dragImg:'',
 	  						dragBg:''
 						},
-						dx:null
+						dx:null,
+						dragImgWidth:0,
+						dragBgWidth:0
 					}
 				}
 			},
@@ -65,7 +67,7 @@
 		data(){
 			return {
 				elWidth:0, // 元素的显示宽 
-				serverWidth:290,
+				dragImgWidth:'',
 				loadingNum:0,
 				tipsText:'向右拖动滑块填充拼图',
 				arrowImg,
@@ -73,7 +75,7 @@
 				errorImg,
 				dragImg:'',
 				dragBg:'',
-				dragImgShow:true,
+				dragImgShow:false,
 				dragBlockShow:true,
 				errorNum:0,
 				moveX:0,
@@ -91,23 +93,28 @@
 					dragBlock = dragVerify.querySelector('.dragblock'),
 					dragBg = this.$el.querySelector('.dragbg'),
 					dragImg = this.$el.querySelector('.dragimg'),
-					maxLeft   = dragVerify.clientWidth - dragBlock.offsetWidth,
+					maxLeft = dragVerify.clientWidth - dragBlock.offsetWidth,
 					tips = this.$el.querySelector('.picture-puzzle .tips'),
-					moveX    = 0,
-					pointsX  = 0,
+					moveX = 0,
+					pointsX = 0,
 					pageX = 0,
-					useTime = 0
+					useTime = 0,
+					dx = 0 
 
-				dragBg.onload = ()=>{
+				var imgLoad = ()=>{
 					this.loadingNum++
-					setTimeout(_=>{
-						this.elWidth = dragBg.offsetWidth
-					},50)
+					if(this.loadingNum>=2){
+						setTimeout(_=>{
+							this.elWidth = dragBg.offsetWidth
+							dx = (this.elWidth/this.verifyData.dragBgWidth)*this.verifyData.dx // 正确位置需要等比例缩放
+							this.dragImgWidth = (this.elWidth/this.verifyData.dragBgWidth)*this.verifyData.dragImgWidth // 碎片图尺寸等比例缩放
+							this.dragImgShow = true
+						},30)
+					}
 				}
 
-				dragImg.onload = ()=>{
-					this.loadingNum++
-				}
+				dragBg.onload = imgLoad
+				dragImg.onload = imgLoad
 
 				var downFunc = '',
 					moveFunc = '',
@@ -187,8 +194,6 @@
 						tips.style.display = 'block'
 					}
 					// 拼图完成 接近即可
-					let dx = this.verifyData.dx/(this.elWidth/this.serverWidth)
-					console.log(dx)
 					if( Math.abs(moveX - dx) < 6 && useTime > 300 ){
 						this.success = true
 						this.timer = setTimeout(_=>{
@@ -225,17 +230,16 @@
 </script>
 
 <style lang="scss">
-
 // 滑动验证
 .picture-puzzle{
-  width:320px;
+  width:300px;
   .error{
     width:30px;
   }
   .picture{
     position: relative;
     width:100%;
-    height:117px;
+    min-height:110px;
     overflow: hidden;
   }
   .dragbg{
@@ -247,7 +251,6 @@
     position: absolute;
     left:0;
     top:0;
-    width:50px;
     cursor: pointer;
   }
   .dragverify{

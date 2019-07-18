@@ -13,9 +13,11 @@ app.get('/slideverify', function (req, res) {
 				dragImg: 'http://localhost:8080/src/images/a1.png',
 				dragBg: 'http://localhost:8080/src/images/a1_big.jpg'
 			},
-			dx: 202
+			dx: 202,
+			dragImgWidth:50,
+			dragBgWidth:280
 		})
-	}, 10)
+	}, 1000)
 })
 
 app.listen(8089, function () {

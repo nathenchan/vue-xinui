@@ -17,7 +17,8 @@
 						<li><router-link to="/slide_verify">SlideVerify 滑动验证</router-link></li>
 						<li><router-link to="/upload">Upload 上传</router-link></li>
 						<li><router-link to="/ring">Ring 圆环</router-link></li>
-						<li><router-link to="/svg_demo">svg 案例</router-link></li>
+						<li><router-link to="/svg_demo">Svg 案例</router-link></li>
+						<li><router-link to="/count_down">CountDown 倒计时</router-link></li>
 					</ul>
 				</div>
 			</aside>
