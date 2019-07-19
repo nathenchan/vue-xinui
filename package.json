@@ -29,6 +29,7 @@
     "ruoxin-package": "^1.0.2",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
+    "three": "^0.106.2",
     "uglifyjs-webpack-plugin": "^2.1.3",
     "vue": "^2.6.10",
     "vue-loader": "^15.7.0",
