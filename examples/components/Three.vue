@@ -1,6 +1,6 @@
 <template>
-	<div>
-		1
+	<div id="three-page">
+		
 	</div>
 </template>
 
@@ -8,24 +8,36 @@
 import * as THREE from 'three'
 export default{
 	mounted(){
-		var scene = new THREE.Scene();
-		var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+			var cWidth = 1000
+			var cHeight = 600
+			var scene = new THREE.Scene();
+			var camera = new THREE.PerspectiveCamera( 50,cWidth/cHeight,0.1, 2000 );
+			
+			var renderer = new THREE.WebGLRenderer();
+			renderer.setSize( cWidth, cHeight );
+			document.querySelector('#three-page').appendChild( renderer.domElement );
 
-		var renderer = new THREE.WebGLRenderer();
-		renderer.setSize( window.innerWidth, window.innerHeight );
-		document.body.appendChild( renderer.domElement );
+			// 粒子
+			var starsGeometry = new THREE.Geometry();
+			
+			for ( var i = 0; i < 10000; i ++ ) {
+				
+				var star = new THREE.Vector3();
+				star.x = THREE.Math.randFloatSpread( 2000 );
+				star.y = THREE.Math.randFloatSpread( 2000 );
+				star.z = THREE.Math.randFloatSpread( 2000 );
 
-		var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-		var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-		var cube = new THREE.Mesh( geometry, material );
+				starsGeometry.vertices.push( star );
 
-		
+			}
 
-		scene.add( cube );
+			var starsMaterial = new THREE.PointsMaterial( { color: 0x888888 } );
 
-		camera.position.z = 5;
+			var starField = new THREE.Points( starsGeometry, starsMaterial );
 
-		renderer.render( scene, camera );
+			scene.add( starField );
+			
+			renderer.render( scene, camera );
 
 	}
 }
