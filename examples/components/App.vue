@@ -1,12 +1,12 @@
 <template>
 	<div id="vue-xinui">
 		<header>
-			<h1>xinui</h1>
+			<!-- <h1>xinui</h1> -->
 		</header>
 		<div id="content" class="clear">
 			<aside>
-				<p class="nav-group-item"><router-link to="/update_log">更新日志</router-link></p>
-				<p class="nav-group-item"><router-link to="/">介绍使用</router-link></p>
+				<!-- <p class="nav-group-item"><router-link to="/update_log">更新日志</router-link></p>
+				<p class="nav-group-item"><router-link to="/">介绍使用</router-link></p> -->
 				<div class="section-group">
 					<h2>组件</h2>
 					<p class="title">Notice</p>
@@ -18,8 +18,9 @@
 						<li><router-link to="/upload">Upload 上传</router-link></li>
 						<li><router-link to="/ring">Ring 圆环</router-link></li>
 						<li><router-link to="/count_down">CountDown 倒计时</router-link></li>
+						<li><router-link to="/pagination">Pagination 分页</router-link></li>
 						<li><router-link to="/svg_demo">Svg 案例</router-link></li>
-						<li><router-link to="/three">three 示例</router-link></li>
+						<!-- <li><router-link to="/three">three 示例</router-link></li> -->
 					</ul>
 				</div>
 			</aside>

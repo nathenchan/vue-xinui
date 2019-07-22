@@ -5,6 +5,7 @@ import SlideVerify from '../packages/SlideVerify/index.js'
 import Upload from '../packages/Upload/index.js'
 import Ring from '../packages/Ring/index.js'
 import CountDown from '../packages/CountDown/index.js'
+import Pagination from '../packages/Pagination/index.js'
 
 var components = [
 	XButton,
@@ -12,7 +13,8 @@ var components = [
 	SlideVerify,
 	Upload,
 	CountDown,
-	Ring
+	Ring,
+	Pagination
 ]
 
 function install(Vue){
