@@ -1,25 +1,71 @@
 <template>
-	<div class="x-pagination">
-		<span class="prebtn">
-			<svg viewBox="0 0 1024 1024" width="20" transform="translate(0,5)" >
-				<path d="M650.721435 191.690834c-8.782014 0-17.565051 3.235694-24.26873 9.708106L328.968383 488.573451c-13.408381 12.932544-13.408381 33.9226 0 46.855144l297.485345 287.172465c13.408381 12.9438 35.130102 12.9438 48.538483 0 13.408381-12.932544 13.408381-33.9226 0-46.855144L401.774573 512.001023l273.215592-263.747963c13.408381-12.932544 13.408381-33.9226 0-46.855144C668.286486 194.926528 659.504472 191.68981 650.721435 191.690834z" ></path>
-			</svg>
-		</span>
-		<span v-show="count <= pageSize" class="current-page">1</span>
-		<span v-show="count > pageSize" class="page-btns" v-for="(item,index) in maxBtnNum" :class="index+1 == page && 'current-page'" @click="pageChange(index+1)">{{index+1}}</span>
-		<!-- <span class="stride-btn page-btns">...</span> -->
-		<span class="last-page-btn">{{Math.ceil(this.count/this.pageSize)}}</span>
-		<span class="nextbtn">
-			<svg viewBox="0 0 1024 1024" width="20" transform="translate(0,5)">
-				<path d="M372.679931 191.690834c8.782014 0 17.565051 3.235694 24.26873 9.708106l297.484322 287.175535c13.408381 12.932544 13.408381 33.9226 0 46.855144l-297.485345 287.172465c-13.408381 12.9438-35.130102 12.9438-48.53746 0-13.408381-12.932544-13.408381-33.9226 0-46.855144l273.215592-263.744893L348.411201 248.25306c-13.408381-12.932544-13.408381-33.9226 0-46.855144C355.11488 194.926528 363.897917 191.68981 372.679931 191.690834z" ></path>
-			</svg>
-		</span>
+	<div :class="[{hasbg:background},'x-pagination']">
+		<div class="btn-page onlyone" v-show="pageNum <= 1">
+			<span class="prebtn"><PreBtn/></span>
+			<span class="page-btns current-page" >1</span>
+			<span class="nextbtn" ><NextBtn/></span>
+		</div>
+
+		<div class="btn-page" v-show="pageNum>1 && pageNum<=pageCount">
+			<span class="prebtn" @click="pageChange(--nowPage)"><PreBtn/></span>
+			<span :class="[{'current-page':(index+1)==nowPage},'page-btns']" v-for="(item,index) in pageNum" @click="pageChange(index+1)">{{index+1}}</span>
+			<span class="nextbtn" @click="pageChange(++nowPage)"><NextBtn/></span>
+		</div>
+		
+		<div class="btn-page" v-show="pageNum>pageCount">
+			<span class="prebtn" @click="pageChange(--nowPage)"><PreBtn/></span>
+			<p class="btn-page" v-show="nowPage-3 <= 1">
+				<span :class="[{'current-page':(index+1)==nowPage},'page-btns']" v-for="(item,index) in pageCount-1" @click="pageChange(index+1)">{{index+1}}</span>
+				<span :class="[{'current-page':nowPage == pageNum},'page-btns']" @click="pageChange(pageNum)">{{pageNum}}</span>
+			</p>
+			<p class="btn-page" v-show="nowPage-3 > 1 && nowPage+3 < pageNum">
+				<span class="page-btns" @click="pageChange(1)">1</span>
+				
+				<span v-for="item in [nowPage-3,nowPage-2,nowPage-1]" class="page-btns" @click="pageChange(item)">{{item}}</span>
+				<span class="page-btns current-page" @click="pageChange(nowPage)">{{nowPage}}</span>
+				<span v-for="item in [nowPage+1,nowPage+2,nowPage+3]" class="page-btns" @click="pageChange(item)">{{item}}</span>
+
+				<span class="page-btns" @click="pageChange(pageNum)">{{pageNum}}</span>
+			</p>
+			<p class="btn-page" v-show="nowPage+3 == pageNum">
+				<span class="page-btns"  @click="pageChange(1)">1</span>
+
+				<span v-for="item in [nowPage-3,nowPage-2,nowPage-1]" class="page-btns" @click="pageChange(item)">{{item}}</span>
+				<span class="page-btns current-page" @click="pageChange(nowPage)">{{nowPage}}</span>
+				<span v-for="item in [nowPage+1,nowPage+2,nowPage+3]" class="page-btns" @click="pageChange(item)">{{item}}</span>
+
+			</p>
+			<p class="btn-page" v-show="nowPage+2 == pageNum">
+				<span class="page-btns" @click="pageChange(1)">1</span>
+				<span v-for="item in [nowPage-3,nowPage-2,nowPage-1]" class="page-btns" @click="pageChange(item)">{{item}}</span>
+				<span class="page-btns current-page" @click="pageChange(nowPage)">{{nowPage}}</span>
+				<span v-for="item in [nowPage+1,nowPage+2]" class="page-btns" @click="pageChange(item)">{{item}}</span>
+			</p>
+			<p class="btn-page" v-show="nowPage+1 == pageNum">
+				<span class="page-btns" @click="pageChange(1)">1</span>
+				<span v-for="item in [nowPage-5,nowPage-4,nowPage-3,nowPage-2,nowPage-1]" class="page-btns" @click="pageChange(item)">{{item}}</span>
+				<span class="page-btns current-page" @click="pageChange(nowPage)">{{nowPage}}</span>
+				<span v-for="item in [nowPage+1]" class="page-btns" @click="pageChange(item)">{{item}}</span>
+			</p>
+			<p class="btn-page" v-show="nowPage == pageNum">
+				<span class="page-btns" @click="pageChange(1)">1</span>
+				<span v-for="item in [nowPage-6,nowPage-5,nowPage-4,nowPage-3,nowPage-2,nowPage-1]" class="page-btns" @click="pageChange(item)">{{item}}</span>
+				<span class="page-btns current-page" @click="pageChange(nowPage)">{{nowPage}}</span>
+			</p>
+			<span class="nextbtn" @click="pageChange(++nowPage)"><NextBtn/></span>
+		</div>
+	
 	</div>
 </template>
 
 <script>
+
+import PreBtn from './PreBtn.vue'
+import NextBtn from './NextBtn.vue'
+
 export default{
 	name:'x-pagination',
+	components:{PreBtn,NextBtn},
 	props:{
 		page:{ // 当前页
 			type:Number,
@@ -33,31 +79,33 @@ export default{
 			type:Number,
 			default:0
 		},
-		pageCount:{ // 最多的分页数字按钮
-			type:Number,
-			default:8
-		},
-		background:{ // 按钮背景色
-			type:Boolean,
-			default:true
-		},
 		jump:{ // 跳转功能
 			type:Boolean,
 			default:true
+		},
+		background:{
+			type:Boolean,
+			default:false
 		}
 	},
 	data(){
 		return {
-			nowPage:this.page
+			nowPage:this.page,
+			pageCount:8
 		}
 	},
 	computed:{
-		maxBtnNum(){
-			return Math.ceil(this.count/this.pageSize) > this.pageCount ? this.pageCount : Math.ceil(this.count/this.pageSize)
+		pageNum(){ // 总共分页数
+			return Math.ceil(this.count/this.pageSize)
 		}
 	},
 	methods:{
 		pageChange(page){ // 当前页变更
+			if( page <= 0 ){
+				page = 1
+			}else if( page >= this.pageNum ){
+				page = this.pageNum
+			}
 			this.nowPage = page
 			this.$emit('update:page',this.nowPage)
 		}
@@ -67,16 +115,31 @@ export default{
 
 <style lang="scss">
 .x-pagination{
+	user-select:none;
 	span{
 		cursor: pointer;
 		user-select:none;
 		font-size: 16px;
+	}
+	.btn-page{
+		display: inline-block;
+	}
+	.onlyone{
+		*{
+			cursor:not-allowed;
+		}
+		.page-btns{
+			margin-right: 0;
+		}
 	}
 	.prebtn,.nextbtn{
 		
 	}
 	.page-btns{
 		margin-right: 10px;
+		&:last-of-type{
+			margin-right: 0;
+		}
 		&:hover{
 			color:#007faa;
 		}

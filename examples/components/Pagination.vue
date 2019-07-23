@@ -1,8 +1,6 @@
 <template>
 	<div>
-		{{page}}
-		<x-pagination :page-size="pageSize" :page.sync="page" :count="count"  />
-		<!-- <button @click="pageChange">test</button> -->
+		<x-pagination :page-size="pageSize" :page.sync="page" :count="count" background  />
 	</div>
 </template>
 
@@ -12,12 +10,12 @@ export default{
 		return {
 			page:1,
 			pageSize:8,
-			count:110
+			count:8
 		}
 	},
 	methods:{
 		pageChange(){
-			this.page++
+			
 		}
 	}
 }
