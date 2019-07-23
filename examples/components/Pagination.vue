@@ -10,7 +10,7 @@ export default{
 		return {
 			page:1,
 			pageSize:8,
-			count:8
+			count:64
 		}
 	},
 	methods:{

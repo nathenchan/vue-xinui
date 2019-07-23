@@ -156,4 +156,7 @@ export default{
 		}
 	}
 }
+.x-pagination.hasbg{
+	
+}
 </style>
