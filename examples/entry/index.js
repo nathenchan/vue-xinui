@@ -16,6 +16,7 @@ import SvgDemo from '../components/SvgDemo.vue'
 import CountDown from '../components/CountDown.vue'
 import Three from '../components/Three.vue'
 import Pagination from '../components/Pagination.vue'
+import XImage from '../components/Image.vue'
 
 import xinui from '../../src/index.js'
 // import { XButton } from '../../src/index.js'
@@ -37,7 +38,8 @@ const routes = [
 	{ path:'/svg_demo',component:SvgDemo },
 	{ path:'/count_down',component:CountDown },
 	{ path:'/three',component:Three },
-	{ path:'/pagination',component:Pagination }
+	{ path:'/pagination',component:Pagination },
+	{ path:'/image',component:XImage }
 ]
 
 const router = new VueRouter({

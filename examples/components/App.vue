@@ -19,10 +19,18 @@
 						<li><router-link to="/ring">Ring 圆环</router-link></li>
 						<li><router-link to="/count_down">CountDown 倒计时</router-link></li>
 						<li><router-link to="/pagination">Pagination 分页</router-link></li>
-						<li><router-link to="/svg_demo">Svg 案例</router-link></li>
-						<!-- <li><router-link to="/three">three 示例</router-link></li> -->
+						<li><router-link to="/image">Image 图片</router-link></li>
 					</ul>
 				</div>
+
+				<div class="section-group">
+					<h2>展示</h2>
+					<p class="title">Notice</p>
+					<ul>
+						<li><router-link to="/svg_demo">Svg 案例</router-link></li>
+					</ul>
+				</div>
+				
 			</aside>
 			<main>
 				<router-view></router-view>
