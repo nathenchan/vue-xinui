@@ -15,8 +15,7 @@ var components = [
 	Upload,
 	CountDown,
 	Ring,
-	Pagination,
-	Ximage
+	Pagination
 ]
 
 function install(Vue){
@@ -24,6 +23,7 @@ function install(Vue){
 		Vue.component(component.name,component)
 	})
 	Vue.use(Loading)
+	Vue.use(Ximage)
 }
 
 if( typeof window !== undefined && window.Vue ){
