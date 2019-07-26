@@ -78,12 +78,12 @@ export default{
 				{
 					src:'http://b-ssl.duitang.com/uploads/item/201707/30/20170730093737_NMCwW.jpeg',
 					id:2,
-					height:871
+					height:1000
 				},
 				{
 					src:'http://b-ssl.duitang.com/uploads/item/201604/29/20160429155655_EYXZx.jpeg',
 					id:3,
-					height:1101
+					height:1390
 				},
 				{
 					src:'http://s15.sinaimg.cn/mw690/00328H1Nzy74f5vBmKG8e&690',
@@ -93,7 +93,7 @@ export default{
 				{
 					src:'http://www.chinadaily.com.cn/tech/img/attachement/jpg/site1/20140312/eca86bd9ddb2148a6b1a27.jpg',
 					id:5,
-					height:578
+					height:630
 				}
 			]
 		}

@@ -1,5 +1,5 @@
 <template>
-	<div class="x-image" :style="{height:height+'px'}" >
+	<div class="x-image" :style="{minHeight:height+'px'}" >
 		<img :data-src="src" :alt="alt" :title="title" ref="img">
 	</div>
 </template>
