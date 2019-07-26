@@ -7,7 +7,7 @@
 					<div class="x-image-test-page">
 						<x-image v-for="item in imgs" :src="item.src" :height="item.height" :key="item.id" />
 					</div>
-					<x-button :btnStyle="{padding:'6px 14px',border-radius:'6px',background:'#000',color:'#fff',margin:'20px auto',display:'block'}" @click="addData">test</x-button>
+					<x-button :btnStyle="{padding:'6px 14px',borderRadius:'6px',background:'#000',color:'#fff',margin:'20px auto',display:'block'}" @click="addData">test</x-button>
 				</div>
 			</div>
 			<source-page :tmpl="ximageText"></source-page>
