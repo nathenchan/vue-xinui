@@ -7,6 +7,7 @@ import Ring from '../packages/Ring/index.js'
 import CountDown from '../packages/CountDown/index.js'
 import Pagination from '../packages/Pagination/index.js'
 import Ximage from '../packages/Image/index.js'
+import Input from '../packages/Input/index.js'
 
 var components = [
 	XButton,
@@ -15,7 +16,8 @@ var components = [
 	Upload,
 	CountDown,
 	Ring,
-	Pagination
+	Pagination,
+	Input
 ]
 
 function install(Vue){

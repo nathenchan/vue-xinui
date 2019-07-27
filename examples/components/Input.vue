@@ -3,11 +3,21 @@
 		<div class="demo-pages">
 			<h3></h3>
 			<div class="show-page">
-				<div class="demo-page">
-					
+				<div class="demo-page inputpage">
+					<x-input type="text" v-model="testNum" placeholder="输入内容" :disabled="false" @blur="blurfn" />
+				</div>
+				<div class="demo-page inputpage">
+					<x-input type="password" v-model="testNum2" placeholder="密码框" />
+				</div>
+				<div class="demo-page inputpage">
+					<x-input type="password" v-model="testNum3" placeholder="3到8位字符，禁止特殊符号" aside-width="80px" >
+						<template v-slot:aside>
+							用户名
+						</template>
+					</x-input>
 				</div>
 			</div>
-			<source-page :tmpl=""></source-page>
+			<!-- <source-page :tmpl=""></source-page> -->
 	    </div>
 
 	    <div class="api-pages">
@@ -64,6 +74,13 @@
 export default{
 	data(){
 		return {
+			testNum:'',
+			testNum2:'',
+			testNum3:''
+		}
+	},
+	methods:{
+		blurfn(val){
 
 		}
 	}
@@ -71,5 +88,7 @@ export default{
 </script>
 
 <style lang="scss">
-	
+.inputpage{
+	width:300px;
+}
 </style>

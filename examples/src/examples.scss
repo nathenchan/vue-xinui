@@ -146,7 +146,10 @@ a{
     line-height: 24px;
   }
   .demo-btn-page,.demo-page{
-    padding:20px;
+    &:first-of-type{
+      margin-top: 10px;
+    }
+    margin:20px;
   }
   .show-page{
     margin-top: 20px;
@@ -241,11 +244,15 @@ aside{
   }
   .section-group{
     margin-top: 10px;
+    &:first-of-type{
+      margin-top: 0;
+    }
     h2{
       font-size: 16px;
     }
     .title{
-      margin-top: 10px;
+      margin-top: 6px;
+      margin-bottom: 10px;
       font-size: 12px;
       color:#999;
     }
@@ -256,8 +263,10 @@ aside{
 }
 
 main{
+  position: absolute;
+  left:300px;
+  right:0;
   padding:0px 20px 0 0 ;
-  margin-left: 200px;
   box-sizing: border-box;
   h3{
     font-weight: normal;
