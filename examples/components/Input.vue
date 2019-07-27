@@ -16,10 +16,19 @@
 						</template>
 					</x-input>
 				</div>
+
+				<div class="demo-page inputpage">
+					<x-input type="password" v-model="testNum4" placeholder="禁止特殊字符" aside-width="80px" :verify="verifyData">
+						<template v-slot:aside>
+							自定义验证
+						</template>
+					</x-input>
+				</div>
+
 			</div>
 			<!-- <source-page :tmpl=""></source-page> -->
 	    </div>
-
+		
 	    <div class="api-pages">
 			<h3>Attributes</h3>
 			<table width="100%">
@@ -76,13 +85,27 @@ export default{
 		return {
 			testNum:'',
 			testNum2:'',
-			testNum3:''
+			testNum3:'',
+			testNum4:'',
+			verifyData:[{type:'required',text:'必填'},{type:'test',reg:/[\d]+/,text:'含数字'},{type:'length',max:10,min:1,text:'1-10个字符'}]
 		}
 	},
 	methods:{
 		blurfn(val){
 
+		},
+		verifyfn(val){
+			// 自定义验证
+			let result = val.test(/javascript/)
+			if(result){
+
+			}else{
+				return false
+			}
 		}
+	},
+	mounted(){
+
 	}
 }
 </script>
