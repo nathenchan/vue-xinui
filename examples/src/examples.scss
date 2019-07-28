@@ -141,6 +141,9 @@ a{
   margin-top: 30px;
   margin-bottom: 30px;
   box-sizing: border-box;
+  &:first-of-type{
+    margin-top: 0;
+  }
   &>.tips{
     margin:20px 0 ; 
     line-height: 24px;

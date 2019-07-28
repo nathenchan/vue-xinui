@@ -3,7 +3,7 @@
 var path = require('path')
 var fs = require('fs')
 var program = require('commander')
-var ComponentName = 'Test'
+var ComponentName = 'Radio'
 
 // 创建packages下的资源
 fs.mkdirSync(path.resolve(__dirname, `../packages/${ComponentName}`))
@@ -54,7 +54,7 @@ fs.writeFile(path.resolve(__dirname, `../examples/components/${ComponentName}.vu
 					
 				</div>
 			</div>
-			<source-page :tmpl=""></source-page>
+			<!-- <source-page :tmpl=""></source-page> -->
 	    </div>
 
 	    <div class="api-pages">
@@ -89,8 +89,7 @@ fs.writeFile(path.resolve(__dirname, `../examples/components/${ComponentName}.vu
 						<td>事件名</td>
 						<td>说明</td>
 						<td>类型</td>
-						<td>默认值</td>
-						<td>可选值</td>
+						<td>回调</td>
 					</tr>
 				</thead>
 				<tbody>
@@ -98,7 +97,6 @@ fs.writeFile(path.resolve(__dirname, `../examples/components/${ComponentName}.vu
 						<td>src</td>
 						<td>图片地址</td>
 						<td>String</td>
-						<td></td>
 						<td></td>
 					</tr>
 				</tbody>

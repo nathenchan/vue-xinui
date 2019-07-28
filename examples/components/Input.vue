@@ -1,10 +1,10 @@
 <template>
 	<div>
 		<div class="demo-pages">
-			<h3></h3>
+			<h3>Input 输入框</h3>
 			<div class="show-page">
 				<div class="demo-page inputpage">
-					<x-input type="text" v-model="testNum" placeholder="输入内容" :disabled="false" @blur="blurfn" />
+					<x-input type="text" v-model="testNum" placeholder="输入内容" :disabled="false" @blur="blurfn" @input="inputfn" />
 				</div>
 				<div class="demo-page inputpage">
 					<x-input type="password" v-model="testNum2" placeholder="密码框" />
@@ -18,7 +18,7 @@
 				</div>
 
 				<div class="demo-page inputpage">
-					<x-input type="password" v-model="testNum4" placeholder="禁止特殊字符" aside-width="80px" :verify="verifyData">
+					<x-input type="password" v-model="testNum4" placeholder="禁止特殊字符" aside-width="80px" :verify="verifyData" :result.sync="verifyResult[0]">
 						<template v-slot:aside>
 							自定义验证
 						</template>
@@ -26,7 +26,7 @@
 				</div>
 
 			</div>
-			<!-- <source-page :tmpl=""></source-page> -->
+			<source-page :tmpl="inputText"></source-page>
 	    </div>
 		
 	    <div class="api-pages">
@@ -43,9 +43,45 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>src</td>
-						<td>图片地址</td>
+						<td>type</td>
+						<td>类型</td>
 						<td>String</td>
+						<td></td>
+						<td>原生属性</td>
+					</tr>
+					<tr>
+						<td>placeholder</td>
+						<td>输入框内提示</td>
+						<td>String</td>
+						<td></td>
+						<td>原生属性</td>
+					</tr>
+					
+					<tr>
+						<td>disabled</td>
+						<td>禁止状态</td>
+						<td>Boolean</td>
+						<td>false</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>aside-width</td>
+						<td>左侧说明占位宽</td>
+						<td>String</td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>verify</td>
+						<td>验证规则</td>
+						<td>Array</td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>result</td>
+						<td>验证结果</td>
+						<td>Bollean</td>
 						<td></td>
 						<td></td>
 					</tr>
@@ -60,18 +96,19 @@
 					<tr>
 						<td>事件名</td>
 						<td>说明</td>
-						<td>类型</td>
-						<td>默认值</td>
-						<td>可选值</td>
+						<td>回调参数</td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td>src</td>
-						<td>图片地址</td>
-						<td>String</td>
-						<td></td>
-						<td></td>
+						<td>blur</td>
+						<td>离开输入框焦点</td>
+						<td>输入框绑定的值</td>
+					</tr>
+					<tr>
+						<td>input</td>
+						<td>输入时触发</td>
+						<td>输入框绑定的值</td>
 					</tr>
 				</tbody>
 			</table>
@@ -80,32 +117,29 @@
 </template>
 
 <script>
+import {inputText} from '../sourcetmp/input.js'
 export default{
 	data(){
 		return {
+			inputText,
 			testNum:'',
 			testNum2:'',
 			testNum3:'',
 			testNum4:'',
-			verifyData:[{type:'required',text:'必填'},{type:'test',reg:/[\d]+/,text:'含数字'},{type:'length',max:10,min:1,text:'1-10个字符'}]
+			verifyData:[{type:'required',text:'必填'},{type:'test',reg:/[\d]+/,text:'含数字'},{type:'length',max:20,min:8,text:'8-20个字符'}],
+			verifyResult:[false]
 		}
 	},
 	methods:{
-		blurfn(val){
-
+		blurfn(e){
+			console.log(e)
 		},
-		verifyfn(val){
-			// 自定义验证
-			let result = val.test(/javascript/)
-			if(result){
-
-			}else{
-				return false
-			}
+		inputfn(e){
+			console.log(e)
 		}
 	},
 	mounted(){
-
+		
 	}
 }
 </script>

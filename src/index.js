@@ -8,6 +8,7 @@ import CountDown from '../packages/CountDown/index.js'
 import Pagination from '../packages/Pagination/index.js'
 import Ximage from '../packages/Image/index.js'
 import Input from '../packages/Input/index.js'
+import Radio from '../packages/Radio/index.js'
 
 var components = [
 	XButton,
@@ -17,7 +18,8 @@ var components = [
 	CountDown,
 	Ring,
 	Pagination,
-	Input
+	Input,
+	Radio
 ]
 
 function install(Vue){

@@ -5,12 +5,8 @@
 				<slot name="aside"></slot>
 			</div>
 			<div :style="{marginLeft:asideWidth}">
-				<input :class="[{error:errorShow},'x-input-self']" :type="type" :value="value" @input="$emit('input',$event.target.value)" :placeholder="placeholder" :disabled="disabled" @blur="blur">
-				<!-- 报错信息 -->
-				<!-- <transition name="fade">
-					<p class="x-input-error-text" v-show="errorShow">{{errorText}}</p>
-				</transition> -->
-				<ul class="x-tips-list" v-show="myVerify">
+				<input :class="[{error:errorShow},'x-input-self']" :type="type" :value="value" @input="inputVerify" :placeholder="placeholder" :disabled="disabled" @blur="blur" @focus="focus">
+				<ul class="x-tips-list" v-show="errorShow">
 					<li v-for="item in myVerify" :class="[{right:item.status}]">
 						<Sigh/>
 						<p>{{item.text}} </p>
@@ -19,12 +15,8 @@
 			</div>
 		</div>
 		<div v-else>
-			<input :class="[{error:errorShow},'x-input-self']" :type="type" :value="value" @input="$emit('input',$event.target.value)" :placeholder="placeholder" :disabled="disabled" @blur="$emit('blur',$event.target.value)">
-			<!-- 报错信息 -->
-			<!-- <transition name="fade">
-				<p class="x-input-error-text" v-show="errorShow">{{errorText}}</p>
-			</transition> -->
-			<ul class="x-tips-list" v-show="myVerify">
+			<input :class="[{error:errorShow},'x-input-self']" :type="type" :value="value" @input="inputVerify" :placeholder="placeholder" :disabled="disabled" @blur="$emit('blur',$event.target.value)" @focus="focus">
+			<ul class="x-tips-list" v-show="errorShow">
 				<li v-for="item in myVerify">
 					<Sigh/>
 					<p>{{item.text}}</p>
@@ -75,46 +67,57 @@ export default{
 		return {
 			errorText:'',
 			errorShow:false,
-			myVerify:this.verify
+			myVerify:this.verify,
+			result:false
 		}
 	},
 	methods:{
+		verifyCommon(val){
+			this.myVerify.forEach((el,index)=>{
+				switch(el.type){
+					case 'required':
+						!val.length ? this.myVerify[index]['status'] = 0 : this.myVerify[index]['status'] = 1 
+					break;
+					case 'test':
+						 el.reg.test(val) ? this.myVerify[index]['status'] = 1 : this.myVerify[index]['status'] = 0
+					break;
+					case 'length':
+						if(val.length>el.max || val.length<el.min){
+							this.myVerify[index]['status'] = 0
+						}else{
+							this.myVerify[index]['status'] = 1
+						}
+					break;
+				}
+			})
+			
+			this.result = this.myVerify.every((el)=>el.status === 1)
+			this.errorShow = !this.result
+		},
 		blur(e){
 			let val = e.target.value
 
 			if(this.myVerify){
 				
-				let index = this.myVerify.findIndex((el)=>el.type == 'required')
-
-				if(index>=0){
-					if(!val.length){
-						this.myVerify[index]['status'] = 0
-						return
-					}else{
-						this.myVerify[index]['status'] = 1 
-					}
-				}
-
-				this.myVerify.forEach((el,index)=>{
-					switch(el.type){
-						case 'test':
-							 el.reg.test(val) ? this.myVerify[index]['status'] = 1 : this.myVerify[index]['status'] = 0
-						break;
-						case 'length':
-							if(val.length>el.max || val.length<el.min){
-								this.myVerify[index]['status'] = 0
-							}else{
-								this.myVerify[index]['status'] = 1
-							}
-						break;
-					}
-				})
-
-				let result = this.myVerify.every((el)=>el.status === 1)
+				this.verifyCommon(val)
 				
-				
+				this.$emit('update:result',this.result)
 			}
 			this.$emit('blur',val)
+
+		},
+		focus(e){
+			if(this.myVerify && this.myVerify.some((el)=>el.status != 1) ){ this.errorShow = true }
+			this.$emit('focus',e)
+		},
+		inputVerify(e){
+
+			let val = e.target.value
+
+			if(this.myVerify){ this.verifyCommon(val) }
+
+			this.$emit('input',e.target.value)
+
 		}
 	},
 	created(){

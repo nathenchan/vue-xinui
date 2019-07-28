@@ -18,6 +18,7 @@ import Three from '../components/Three.vue'
 import Pagination from '../components/Pagination.vue'
 import XImage from '../components/Image.vue'
 import Input from '../components/Input.vue'
+import Radio from '../components/Radio.vue'
 
 import xinui from '../../src/index.js'
 // import { XButton } from '../../src/index.js'
@@ -41,7 +42,8 @@ const routes = [
 	{ path:'/three',component:Three },
 	{ path:'/pagination',component:Pagination },
 	{ path:'/image',component:XImage },
-	{ path:'/input',component:Input }
+	{ path:'/input',component:Input },
+	{ path:'/radio',component:Radio }
 ]
 
 const router = new VueRouter({
