@@ -1,9 +1,7 @@
 <template>
 	<div class="source-code">
       <div class="content-page"  v-show="codeShow">
-        <div class="code-tips" v-if="tmpl.tips">
-          {{tmpl.tips}}
-        </div>
+        <div class="code-tips" v-if="tmpl.tips" v-text="tmpl.tips"></div>
         <div class="code-page">
           <pre class="html" v-if="tmpl.html"><code v-text="tmpl.html"></code></pre>
           <pre class="css" v-if="tmpl.css"><code v-text="tmpl.css"></code></pre>

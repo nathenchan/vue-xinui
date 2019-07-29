@@ -9,6 +9,8 @@ import Pagination from '../packages/Pagination/index.js'
 import Ximage from '../packages/Image/index.js'
 import Input from '../packages/Input/index.js'
 import Radio from '../packages/Radio/index.js'
+import Checkbox from '../packages/Checkbox/index.js'
+import CheckboxGroup from '../packages/CheckboxGroup/index.js'
 
 var components = [
 	XButton,
@@ -19,7 +21,9 @@ var components = [
 	Ring,
 	Pagination,
 	Input,
-	Radio
+	Radio,
+	Checkbox,
+	CheckboxGroup
 ]
 
 function install(Vue){

@@ -3,7 +3,7 @@
 var path = require('path')
 var fs = require('fs')
 var program = require('commander')
-var ComponentName = 'Radio'
+var ComponentName = 'Checkbox'
 
 // 创建packages下的资源
 fs.mkdirSync(path.resolve(__dirname, `../packages/${ComponentName}`))
@@ -88,15 +88,13 @@ fs.writeFile(path.resolve(__dirname, `../examples/components/${ComponentName}.vu
 					<tr>
 						<td>事件名</td>
 						<td>说明</td>
-						<td>类型</td>
-						<td>回调</td>
+						<td>回调参数</td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td>src</td>
 						<td>图片地址</td>
-						<td>String</td>
 						<td></td>
 					</tr>
 				</tbody>

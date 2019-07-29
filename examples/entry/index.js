@@ -19,6 +19,7 @@ import Pagination from '../components/Pagination.vue'
 import XImage from '../components/Image.vue'
 import Input from '../components/Input.vue'
 import Radio from '../components/Radio.vue'
+import Checkbox from '../components/Checkbox.vue'
 
 import xinui from '../../src/index.js'
 // import { XButton } from '../../src/index.js'
@@ -43,7 +44,8 @@ const routes = [
 	{ path:'/pagination',component:Pagination },
 	{ path:'/image',component:XImage },
 	{ path:'/input',component:Input },
-	{ path:'/radio',component:Radio }
+	{ path:'/radio',component:Radio },
+	{ path:'/checkbox',component:Checkbox }
 ]
 
 const router = new VueRouter({
