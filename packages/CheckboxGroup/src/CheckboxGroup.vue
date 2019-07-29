@@ -1,14 +1,11 @@
 <template>
 	<div class="x-checkbox-group">
 		<slot></slot>
-		<Testc/>
 	</div>
 </template>
 
 <script>
-import Testc from './test.vue'
 export default{
-	components:{Testc},
 	name:'x-checkbox-group',
 	model: {
 	    prop: 'value', // 指向父组件 v-model绑定的值
