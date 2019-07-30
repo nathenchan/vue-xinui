@@ -7,24 +7,26 @@
 <script>
 export default{
 	name:'x-checkbox-group',
-	model: {
-	    prop: 'value', // 指向父组件 v-model绑定的值
-	    event: 'update' // 在本组件内触发可以更新value
+	model:{
+		prop:'value',
+		event:'change'
 	},
-	props: {
-		checked: Boolean
-	},
-	data(){
-		return {
-			dimensions:'a'
+	props:{
+		max:{
+			type:[String,Number],
+			default:null
 		}
 	},
-	provide: {
-		foo: 'bar2'
-	},
 	methods:{
-		fn(){
-			this.$emit('update',[1])
+		listChange(checkboxVal){ // 由子组件调用
+			if(this.$attrs.value.indexOf(checkboxVal)<0){
+				if( this.max == null || this.$attrs.value.length < this.max ){
+					this.$attrs.value.push(checkboxVal)
+				}
+			}else{
+				this.$attrs.value.splice(this.$attrs.value.indexOf(checkboxVal),1)
+			}
+			this.$emit('change',this.$attrs.value)
 		}
 	}
 }

@@ -1,6 +1,6 @@
 <template>
-	<div :class="[{disabled},'x-radio']" @click="change">
-		<div :class="[{'active':value == radioModel},'x-radio-round']">
+	<div :class="[{disabled},'x-radio']" @click="changeVal">
+		<div :class="[{'active':val == $attrs.value},'x-radio-round']">
 			<div class="x-radio-insideround"></div>
 		</div>
 		<div class="x-radio-text">
@@ -12,8 +12,12 @@
 <script>
 export default{
 	name:'x-radio',
+	model:{
+		prop:'value',
+		event:'change'
+	},
 	props:{
-		value:{
+		val:{
 			type:String,
 			default:null
 		},
@@ -27,9 +31,9 @@ export default{
 		}
 	},
 	methods:{
-		change(){
+		changeVal(){
 			if(!this.disabled){
-				this.$emit('update:radio-model',this.value)
+				this.$emit('change',this.val)
 			}
 		}
 	}

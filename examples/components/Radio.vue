@@ -4,13 +4,13 @@
 			<h3>Radio 单选框</h3>
 			<div class="show-page">
 				<div class="demo-page">
-					<x-radio value="1" :radio-model.sync="radioVal">
+					<x-radio val="1" v-model="radioVal">
 						<template v-slot:text >选项1</template>
 					</x-radio>
-					<x-radio value="2" :radio-model.sync="radioVal">
+					<x-radio val="2" v-model="radioVal">
 						<template v-slot:text >选项2</template>
 					</x-radio>
-					<x-radio value="3" :radio-model.sync="radioVal">
+					<x-radio val="3" v-model="radioVal">
 						<template v-slot:text >选项3</template>
 					</x-radio>
 				</div>
@@ -22,10 +22,10 @@
 			<h3>禁用状态</h3>
 			<div class="show-page">
 				<div class="demo-page">
-					<x-radio value="a" :radio-model.sync="radioVal2" :disabled="true">
+					<x-radio val="a" v-model="radioVal2" :disabled="true">
 						<template v-slot:text >选项1</template>
 					</x-radio>
-					<x-radio value="b" :radio-model.sync="radioVal2" :disabled="true">
+					<x-radio val="b" v-model="radioVal2" :disabled="true">
 						<template v-slot:text >选项2</template>
 					</x-radio>
 				</div>
@@ -47,14 +47,14 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>value</td>
+						<td>val</td>
 						<td>选项的值</td>
 						<td>String|Number</td>
 						<td></td>
 						<td></td>
 					</tr>
 					<tr>
-						<td>radio-model</td>
+						<td>v-model</td>
 						<td>绑定的值</td>
 						<td>String|Number</td>
 						<td></td>
