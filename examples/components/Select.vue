@@ -2,16 +2,19 @@
 	<div>
 		<div class="demo-pages">
 			<h3>Select 下拉菜单</h3>
+			<p class="tips">
+				x-option,label为说明，value为值。
+			</p>
 			<div class="show-page">
 				<div class="demo-page">
-					<x-select v-model="value" placeholder="下拉菜单">
+					<x-select v-model="value" placeholder="下拉菜单" @change="changeData">
 						<x-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
 					</x-select>
 				</div>
 			</div>
-			<!-- <source-page :tmpl=""></source-page> -->
+			<source-page :tmpl="selectText"></source-page>
 	    </div>
-
+		
 	    <div class="api-pages">
 			<h3>Attributes</h3>
 			<table width="100%">
@@ -26,8 +29,8 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>src</td>
-						<td>图片地址</td>
+						<td>v-model</td>
+						<td>select的值</td>
 						<td>String</td>
 						<td></td>
 						<td></td>
@@ -48,21 +51,23 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>src</td>
-						<td>图片地址</td>
+						<td>change</td>
+						<td>值改变时触发</td>
 						<td></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
+
 	</div>
 </template>
 
 <script>
+import {selectText} from '../sourcetmp/select.js'
 export default{
 	data(){
 		return {
-			value:'',
+			value:'1',
 			options:[
 				{
 					value:'1',
@@ -74,14 +79,15 @@ export default{
 				},
 				{
 					value:'3',
-					label:'选项3'
+					label:'选项3选项3选项3选项3选项3选项3'
 				}
 			]
+		}
+	},
+	methods:{
+		changeData(){
+			console.log(1)
 		}
 	}
 }
 </script>
-
-<style lang="scss">
-	
-</style>

@@ -1,5 +1,5 @@
 <template>
-	<div class="x-option">{{label}}</div>
+	<div class="x-option" @click.stop="choseOption">{{label}}</div>
 </template>
 
 <script>
@@ -14,6 +14,11 @@ export default {
 			type:[String,Number],
 			default:''
 		},
+	},
+	methods:{
+		choseOption(){
+			this.$emit('chose',this.value)
+		}
 	}
 }
 </script>

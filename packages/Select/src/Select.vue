@@ -1,17 +1,24 @@
 <template>
 	<div class="x-select" @click="showList">
 		<p class="x-select-value">{{selectLabel}}</p>
+		<Arrow :class="{down:listShow}"/>
 		<transition name="fade">
 			<div class="x-select-list" v-show="listShow">
-				
+				<x-option v-for="item in this.$slots.default" :key="item.componentOptions.propsData.value" :label="item.componentOptions.propsData.label" :value="item.componentOptions.propsData.value" @chose="update" />
 			</div>
 		</transition>
 	</div>
 </template>
 
 <script>
+
+// change event
+import Arrow from './Arrow.vue'
+
 export default{
 	name:'x-select',
+	components:{Arrow},
+	inheritAttrs:false,
 	model:{
 		prop:'value',
 		event:'change'
@@ -24,29 +31,33 @@ export default{
 	},
 	data(){
 		return {
-			selectLabel:'',
-			selectValue:this.$attrs.value,
 			listShow:false
 		}
 	},
 	methods:{
 		showList(){
 			this.listShow = !this.listShow
+		},
+		update(val){
+			this.$emit('change',val)
+			this.listShow = false
 		}
 	},
-	created(){
-		this.$slots.default.forEach(el=>{
-			let val = el.componentOptions.propsData.value
-			if(val == this.selectValue){
-				this.selectLabel = el.componentOptions.propsData.label
-			}
-		})
+	computed:{
+		selectValue(){
+			return this.$attrs.value
+		},
+		selectLabel(){
+			var myval = null
+			this.$slots.default.forEach(el=>{
+				let val = el.componentOptions.propsData.value
+				if(val == this.selectValue){
+					myval =  el.componentOptions.propsData.label
+				}
+			})
+			return myval
+		}
 	}
-	// computed:{
-	// 	selectLabel(){
-	// 		return this.placeholder
-	// 	}
-	// }
 }
 </script>
 
@@ -84,16 +95,33 @@ export default{
 	}
 }
 .x-select-value{
-	
+	width:90%;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
 }
 .x-option{
 	text-indent: 1em;
 	line-height: 34px;
 	cursor: pointer;
+	width:100%;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
 	&:hover{
 		background:#f1f1f1;
 	}
 }
+.x-select-arrow{
+	position: absolute;
+	right:4px;
+	top:6px;
+	transition:.15s;
+	&.down{
+		transform:rotate(180deg);
+	}
+}
+
 .x-select{
 	/* fade */
 	.fade-enter-active, .fade-leave-active {
