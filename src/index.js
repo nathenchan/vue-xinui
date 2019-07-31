@@ -11,6 +11,8 @@ import Input from '../packages/Input/index.js'
 import Radio from '../packages/Radio/index.js'
 import Checkbox from '../packages/Checkbox/index.js'
 import CheckboxGroup from '../packages/CheckboxGroup/index.js'
+import Select from '../packages/Select/index.js'
+import Option from '../packages/Option/index.js'
 
 var components = [
 	XButton,
@@ -23,7 +25,9 @@ var components = [
 	Input,
 	Radio,
 	Checkbox,
-	CheckboxGroup
+	CheckboxGroup,
+	Select,
+	Option
 ]
 
 function install(Vue){

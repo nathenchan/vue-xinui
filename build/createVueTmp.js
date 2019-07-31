@@ -3,7 +3,7 @@
 var path = require('path')
 var fs = require('fs')
 var program = require('commander')
-var ComponentName = 'Checkbox'
+var ComponentName = 'Select'
 
 // 创建packages下的资源
 fs.mkdirSync(path.resolve(__dirname, `../packages/${ComponentName}`))

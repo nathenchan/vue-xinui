@@ -29,7 +29,8 @@
 					<ul>
 						<li><router-link to="/input">Input 输入框</router-link></li>
 						<li><router-link to="/radio">Radio 单选框</router-link></li>
-						<li><router-link to="/checkbox">checkbox 多选框</router-link></li>
+						<li><router-link to="/checkbox">Checkbox 多选框</router-link></li>
+						<li><router-link to="/select">Select 下拉菜单</router-link></li>
 					</ul>
 				</div>
 
