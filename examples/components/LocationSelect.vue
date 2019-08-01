@@ -2,6 +2,7 @@
 	<div>
 		<div class="demo-pages">
 			<h3>LocationSelect 地址选择</h3>
+			<p class="tips">数据格式如下：参考源码展示</p>
 			<div class="show-page">
 				<div class="demo-page">
 					<x-location-select :location-data="locationData" v-model="locationVal" @lastChange="changefn" />
@@ -72,7 +73,43 @@ export default{
 		return {
 			locationText,
 			locationData,
-			locationVal:''
+			locationVal:'',
+			testData:[
+				{
+				    "name": "北京市",
+				    "cityList": [
+				    	{ // 市级
+				    		"name": "北京市", // 如果是直辖市则与上级名相同
+				    		"areaList": [ // 区列表
+								{
+									"name": "东城区"
+								}
+				    		]
+				    	}
+				    ]
+				},
+				{
+					"name": "广东省",
+					"cityList": [
+						{ // 市级
+				    		"name": "深圳市",
+				    		"areaList": [ // 区列表
+								{
+									"name": "福田区"
+								}
+				    		]
+				    	},
+				    	{
+				    		"name": "广州市",
+				    		"areaList": [ // 区列表
+								{
+									"name": "荔湾区"
+								}
+				    		]
+				    	}
+					]
+				}
+			]
 		}
 	},
 	methods:{
