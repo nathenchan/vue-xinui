@@ -21,6 +21,7 @@ import Input from '../components/Input.vue'
 import Radio from '../components/Radio.vue'
 import Checkbox from '../components/Checkbox.vue'
 import Select from '../components/Select.vue'
+import LocationSelect from '../components/LocationSelect.vue'
 
 import xinui from '../../src/index.js'
 // import { XButton } from '../../src/index.js'
@@ -47,7 +48,8 @@ const routes = [
 	{ path:'/input',component:Input },
 	{ path:'/radio',component:Radio },
 	{ path:'/checkbox',component:Checkbox },
-	{ path:'/select',component:Select }
+	{ path:'/select',component:Select },
+	{ path:'/location_select',component:LocationSelect }
 ]
 
 const router = new VueRouter({

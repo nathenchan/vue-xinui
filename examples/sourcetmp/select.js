@@ -1,5 +1,5 @@
 var selectText = {
-	tips:``,
+	tips:`111`,
 	html:`<x-select v-model="value" placeholder="下拉菜单" @change="changeData">
 	<x-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
 </x-select>`,

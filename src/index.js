@@ -13,6 +13,7 @@ import Checkbox from '../packages/Checkbox/index.js'
 import CheckboxGroup from '../packages/CheckboxGroup/index.js'
 import Select from '../packages/Select/index.js'
 import Option from '../packages/Option/index.js'
+import LocationSelect from '../packages/LocationSelect/index.js'
 
 var components = [
 	XButton,
@@ -27,7 +28,8 @@ var components = [
 	Checkbox,
 	CheckboxGroup,
 	Select,
-	Option
+	Option,
+	LocationSelect
 ]
 
 function install(Vue){
