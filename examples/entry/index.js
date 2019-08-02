@@ -2,6 +2,7 @@ import '../src/examples.scss';
 import '../../src/xinui.scss';
 
 import Vue from 'vue'
+
 import VueRouter from 'vue-router'
 import App from '../components/App.vue'
 import Index from '../components/Index.vue'
