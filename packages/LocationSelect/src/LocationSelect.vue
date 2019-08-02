@@ -1,7 +1,7 @@
 <template>
 	<div class="x-location-select">
 		<div class="location-page">
-			<input type="text" v-model="provinceName">
+			<p class="location-text">{{provinceName}}</p>
 			<svg @click="provinceShow = !provinceShow" class="x-arrow" viewBox="0 0 1024 1024" width="24"><path d="M762.76 371.92l-2.68-2.68a48.24 48.24 0 0 0-68 0l-180 180-180-180a48.24 48.24 0 0 0-68 0l-2.68 2.68a48.24 48.24 0 0 0 0 68l214.65 214.84a53.19 53.19 0 0 0 71.9 0L762.76 440a48.24 48.24 0 0 0 0-68.08z" fill="#c0c4cc" ></path></svg>
 			<div class="list-page" v-show="provinceShow">
 				<ul class="list">
@@ -10,7 +10,7 @@
 			</div>
 		</div>
 		<div class="location-page" v-show="noMunicipality">
-			<input type="text" v-model="cityName">
+			<p class="location-text">{{cityName}}</p>
 			<svg @click="cityShow = !cityShow" class="x-arrow" viewBox="0 0 1024 1024" width="24"><path d="M762.76 371.92l-2.68-2.68a48.24 48.24 0 0 0-68 0l-180 180-180-180a48.24 48.24 0 0 0-68 0l-2.68 2.68a48.24 48.24 0 0 0 0 68l214.65 214.84a53.19 53.19 0 0 0 71.9 0L762.76 440a48.24 48.24 0 0 0 0-68.08z" fill="#c0c4cc" ></path></svg>
 			<div class="list-page" v-show="cityShow">
 				<ul class="list"  v-show="cityList.length">
@@ -22,7 +22,7 @@
 			</div>
 		</div>
 		<div class="location-page">
-			<input type="text" v-model="areaName">
+			<p class="location-text">{{areaName}}</p>
 			<svg @click="areaShow = !areaShow" class="x-arrow" viewBox="0 0 1024 1024" width="24"><path d="M762.76 371.92l-2.68-2.68a48.24 48.24 0 0 0-68 0l-180 180-180-180a48.24 48.24 0 0 0-68 0l-2.68 2.68a48.24 48.24 0 0 0 0 68l214.65 214.84a53.19 53.19 0 0 0 71.9 0L762.76 440a48.24 48.24 0 0 0 0-68.08z" fill="#c0c4cc" ></path></svg>
 			<div class="list-page" v-show="areaShow">
 				<ul class="list" v-show="areaList.length">
@@ -158,7 +158,7 @@ export default{
 		&:hover{
 			border-color:#2d98e6;
 		}
-		input{
+		.location-text{
 			text-indent:1em;
 		}
 	}
