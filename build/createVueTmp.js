@@ -1,9 +1,8 @@
 // 自动创建组件
-
 var path = require('path')
 var fs = require('fs')
 var program = require('commander')
-var ComponentName = 'LocationSelect'
+var ComponentName = 'Switch'
 
 // 创建packages下的资源
 fs.mkdirSync(path.resolve(__dirname, `../packages/${ComponentName}`))
