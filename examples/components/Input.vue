@@ -2,9 +2,10 @@
 	<div>
 		<div class="demo-pages">
 			<h3>Input 输入框</h3>
+			<p class="tips">注意，verify验证对象不可共用同一个，因为javascript中对象和数组都是通过引用传入</p>
 			<div class="show-page">
 				<div class="demo-page inputpage">
-					<x-input type="text" v-model="testNum" placeholder="输入内容" :disabled="false" @blur="blurfn" @input="inputfn" />
+					<x-input type="text" v-model="testNum" placeholder="输入内容" :disabled="false" @blur="blurfn" @input="inputfn" :verify="verifyData" :result.sync="verifyResult[0]" />
 				</div>
 				<div class="demo-page inputpage">
 					<x-input type="password" v-model="testNum2" placeholder="密码框" />
@@ -127,7 +128,7 @@ export default{
 			testNum3:'',
 			testNum4:'',
 			verifyData:[{type:'required',text:'必填'},{type:'test',reg:/[\d]+/,text:'含数字'},{type:'length',max:20,min:8,text:'8-20个字符'}],
-			verifyResult:[false]
+			verifyResult:[false,false]
 		}
 	},
 	methods:{

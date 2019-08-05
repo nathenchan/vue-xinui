@@ -65,11 +65,12 @@ export default{
 .x-select{
 	position: relative;
 	max-width:140px;
-	min-height:10px;
+	min-height:34px;
 	border:1px solid #e3e3e3;
 	border-radius:4px;
 	padding:8px 14px;
 	cursor: pointer;
+	box-sizing:border-box;
 	*{
 		user-select:none;
 	}
@@ -85,6 +86,7 @@ export default{
     background: #fff;
 	border:1px solid #e3e3e3;
 	border-radius:4px;
+	z-index: 9;
 	&:after{
 		position: absolute;
 		left: 20px;

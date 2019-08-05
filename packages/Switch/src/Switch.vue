@@ -1,6 +1,8 @@
 <template>
-	<div :class="[{'active':$attrs.value},'x-switch']" @click="changVal">
-		<div class="x-switch-round"></div>
+	<div :class="[{'active':$attrs.value},'x-switch']" >
+		<div class="x-switch-page" @click="changVal">
+			<div class="x-switch-round"></div>
+		</div>
 	</div>
 </template>
 
@@ -32,15 +34,19 @@ export default{
 
 <style lang="scss">
 .x-switch{
-	position: relative;
-	width:46px;
-	height:20px;
-	background:#999;
-	border-radius:10px;
-	cursor: pointer;
-	transition:.2s;
+	.x-switch-page{
+		position: relative;
+		width:46px;
+		height:20px;
+		background:#999;
+		border-radius:10px;
+		cursor: pointer;
+		transition:.2s;
+	}
 	&.active{
-		background:#1890ff;
+		.x-switch-page{
+			background:#1890ff;
+		}
 		.x-switch-round{
 			left:27px;
 		}
@@ -54,6 +60,11 @@ export default{
 		background:#fff;
 		border-radius: 9px;
 		transition:.2s;
+	}
+}
+.x-form-control{
+	.x-switch{
+		padding-top: 5px;
 	}
 }
 </style>

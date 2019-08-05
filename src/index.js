@@ -15,6 +15,11 @@ import Select from '../packages/Select/index.js'
 import Option from '../packages/Option/index.js'
 import LocationSelect from '../packages/LocationSelect/index.js'
 import Switch from '../packages/Switch/index.js'
+import Form from '../packages/Form/index.js'
+import FormItem from '../packages/FormItem/index.js'
+import FormLabel from '../packages/FormLabel/index.js'
+import FormControl from '../packages/FormControl/index.js'
+import Textarea from '../packages/Textarea/index.js'
 
 var components = [
 	XButton,
@@ -31,7 +36,12 @@ var components = [
 	Select,
 	Option,
 	LocationSelect,
-	Switch
+	Switch,
+	Form,
+	FormItem,
+	FormLabel,
+	FormControl,
+	Textarea
 ]
 
 function install(Vue){

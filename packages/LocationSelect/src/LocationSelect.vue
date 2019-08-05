@@ -1,38 +1,41 @@
 <template>
 	<div class="x-location-select">
-		<div class="location-page">
-			<p class="location-text">{{provinceName}}</p>
-			<svg @click="provinceShow = !provinceShow" class="x-arrow" viewBox="0 0 1024 1024" width="24"><path d="M762.76 371.92l-2.68-2.68a48.24 48.24 0 0 0-68 0l-180 180-180-180a48.24 48.24 0 0 0-68 0l-2.68 2.68a48.24 48.24 0 0 0 0 68l214.65 214.84a53.19 53.19 0 0 0 71.9 0L762.76 440a48.24 48.24 0 0 0 0-68.08z" fill="#c0c4cc" ></path></svg>
-			<div class="list-page" v-show="provinceShow">
-				<ul class="list">
-					<li v-for="item in locationData" @click="choseProvince(item.name)">{{item.name}}</li>
-				</ul>
+		<div class="x-location-page">
+			<div class="location-page">
+				<p class="location-text" @click="provinceShow = !provinceShow">{{provinceName}}</p>
+				<svg @click="provinceShow = !provinceShow" class="x-arrow" viewBox="0 0 1024 1024" width="24"><path d="M762.76 371.92l-2.68-2.68a48.24 48.24 0 0 0-68 0l-180 180-180-180a48.24 48.24 0 0 0-68 0l-2.68 2.68a48.24 48.24 0 0 0 0 68l214.65 214.84a53.19 53.19 0 0 0 71.9 0L762.76 440a48.24 48.24 0 0 0 0-68.08z" fill="#c0c4cc" ></path></svg>
+				<div class="list-page" v-show="provinceShow">
+					<ul class="list">
+						<li v-for="item in locationData" @click="choseProvince(item.name)">{{item.name}}</li>
+					</ul>
+				</div>
+			</div>
+			<div class="location-page" v-show="noMunicipality">
+				<p class="location-text" @click="cityShow = !cityShow">{{cityName}}</p>
+				<svg @click="cityShow = !cityShow" class="x-arrow" viewBox="0 0 1024 1024" width="24"><path d="M762.76 371.92l-2.68-2.68a48.24 48.24 0 0 0-68 0l-180 180-180-180a48.24 48.24 0 0 0-68 0l-2.68 2.68a48.24 48.24 0 0 0 0 68l214.65 214.84a53.19 53.19 0 0 0 71.9 0L762.76 440a48.24 48.24 0 0 0 0-68.08z" fill="#c0c4cc" ></path></svg>
+				<div class="list-page" v-show="cityShow">
+					<ul class="list"  v-show="cityList.length">
+						<li v-for="item in cityList" @click="choseCity(item.name)">{{item.name}}</li>
+					</ul>
+					<p class="no-data" v-show="cityList.length == 0">
+						no Data
+					</p>
+				</div>
+			</div>
+			<div class="location-page">
+				<p class="location-text"  @click="areaShow = !areaShow">{{areaName}}</p>
+				<svg @click="areaShow = !areaShow" class="x-arrow" viewBox="0 0 1024 1024" width="24"><path d="M762.76 371.92l-2.68-2.68a48.24 48.24 0 0 0-68 0l-180 180-180-180a48.24 48.24 0 0 0-68 0l-2.68 2.68a48.24 48.24 0 0 0 0 68l214.65 214.84a53.19 53.19 0 0 0 71.9 0L762.76 440a48.24 48.24 0 0 0 0-68.08z" fill="#c0c4cc" ></path></svg>
+				<div class="list-page" v-show="areaShow">
+					<ul class="list" v-show="areaList.length">
+						<li v-for="item in areaList" @click="choseArea(item.name)">{{item.name}}</li>
+					</ul>
+					<p class="no-data" v-show="areaList.length == 0">
+						no Data
+					</p>
+				</div>
 			</div>
 		</div>
-		<div class="location-page" v-show="noMunicipality">
-			<p class="location-text">{{cityName}}</p>
-			<svg @click="cityShow = !cityShow" class="x-arrow" viewBox="0 0 1024 1024" width="24"><path d="M762.76 371.92l-2.68-2.68a48.24 48.24 0 0 0-68 0l-180 180-180-180a48.24 48.24 0 0 0-68 0l-2.68 2.68a48.24 48.24 0 0 0 0 68l214.65 214.84a53.19 53.19 0 0 0 71.9 0L762.76 440a48.24 48.24 0 0 0 0-68.08z" fill="#c0c4cc" ></path></svg>
-			<div class="list-page" v-show="cityShow">
-				<ul class="list"  v-show="cityList.length">
-					<li v-for="item in cityList" @click="choseCity(item.name)">{{item.name}}</li>
-				</ul>
-				<p class="no-data" v-show="cityList.length == 0">
-					no Data
-				</p>
-			</div>
-		</div>
-		<div class="location-page">
-			<p class="location-text">{{areaName}}</p>
-			<svg @click="areaShow = !areaShow" class="x-arrow" viewBox="0 0 1024 1024" width="24"><path d="M762.76 371.92l-2.68-2.68a48.24 48.24 0 0 0-68 0l-180 180-180-180a48.24 48.24 0 0 0-68 0l-2.68 2.68a48.24 48.24 0 0 0 0 68l214.65 214.84a53.19 53.19 0 0 0 71.9 0L762.76 440a48.24 48.24 0 0 0 0-68.08z" fill="#c0c4cc" ></path></svg>
-			<div class="list-page" v-show="areaShow">
-				<ul class="list" v-show="areaList.length">
-					<li v-for="item in areaList" @click="choseArea(item.name)">{{item.name}}</li>
-				</ul>
-				<p class="no-data" v-show="areaList.length == 0">
-					no Data
-				</p>
-			</div>
-		</div>
+		<p class="error-text" v-show="errorShow">请选择完整地址</p>
 	</div>
 </template>
 
@@ -51,6 +54,7 @@ export default{
 	},
 	data(){
 		return {
+			errorShow:false,
 			provinceName:'',
 			cityName:'',
 			areaName:'',
@@ -139,7 +143,7 @@ export default{
 
 <style lang="scss">
 .x-location-select{
-	&:after{
+	.x-location-page:after{
 		content: '';
 		visibility: hidden;
 		height:0;
@@ -152,13 +156,15 @@ export default{
 		margin-right: 10px;
 		border:1px solid #e3e3e3;
 		border-radius:4px;
-		width:160px;
-		height:30px;
-		line-height:30px;
+		width:140px;
+		height:32px;
+		line-height:32px;
 		&:hover{
 			border-color:#2d98e6;
 		}
 		.location-text{
+			height:100%;
+			cursor: pointer;
 			text-indent:1em;
 		}
 	}
@@ -200,6 +206,10 @@ export default{
 	.no-data{
 		padding:10px 0;
 		text-align: center;
+	}
+	.error-text{
+		margin-top:6px;
+		color:#d91e18;
 	}
 }
 </style>

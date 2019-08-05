@@ -24,6 +24,8 @@ import Checkbox from '../components/Checkbox.vue'
 import Select from '../components/Select.vue'
 import LocationSelect from '../components/LocationSelect.vue'
 import Switch from '../components/Switch.vue'
+import Form from '../components/Form.vue'
+import Textarea from '../components/Textarea.vue'
 
 import xinui from '../../src/index.js'
 // import { XButton } from '../../src/index.js'
@@ -52,7 +54,9 @@ const routes = [
 	{ path:'/checkbox',component:Checkbox },
 	{ path:'/select',component:Select },
 	{ path:'/location_select',component:LocationSelect },
-	{ path:'/switch',component:Switch }
+	{ path:'/switch',component:Switch },
+	{ path:'/form',component:Form },
+	{ path:'/textarea',component:Textarea }
 ]
 
 const router = new VueRouter({

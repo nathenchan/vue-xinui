@@ -1,10 +1,12 @@
 <template>
 	<div :class="[{disabled},'x-radio']" @click="changeVal">
-		<div :class="[{'active':val == $attrs.value},'x-radio-round']">
-			<div class="x-radio-insideround"></div>
-		</div>
-		<div class="x-radio-text">
-			<slot name="text"></slot>
+		<div class="x-radio-page">
+			<div :class="[{'active':val == $attrs.value},'x-radio-round']">
+				<div class="x-radio-insideround"></div>
+			</div>
+			<div class="x-radio-text">
+				<slot name="text"></slot>
+			</div>
 		</div>
 	</div>
 </template>
@@ -54,7 +56,7 @@ export default{
 			background: #93b9e0;
 		}
 	}
-	&:after{
+	.x-radio-page:after{
 		content:'';
 		display: block;
 		clear:both;
@@ -64,8 +66,8 @@ export default{
 	.x-radio-round{
 		float: left;
 		margin:3px 10px 0 0;
-		width:14px;
-		height:14px;
+		width:20px;
+		height:20px;
 		border-radius: 50%;
 		overflow: hidden;
 		border:1px solid #c7c7c7;
@@ -76,14 +78,20 @@ export default{
 		}
 	}
 	.x-radio-insideround{
-		margin:4px auto;
-		width:6px;
-		height:6px;
+		margin:5px auto;
+		width:10px;
+		height:10px;
 		border-radius: 50%;
 		background:#fff;
 	}
 	.x-radio-text{
 		float: left;
+		line-height: 28px;
+	}
+}
+.x-form-item{
+	.x-radio{
+		margin-top:2px;
 	}
 }
 </style>

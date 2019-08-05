@@ -5,7 +5,7 @@
 				<slot name="aside"></slot>
 			</div>
 			<div :style="{marginLeft:asideWidth}">
-				<input :class="[{error:errorShow},'x-input-self']" :type="type" :value="value" @input="inputVerify" :placeholder="placeholder" :disabled="disabled" @blur="blur" @focus="focus">
+				<input :class="[{error:errorShow},'x-input-self']" :type="type" v-model="value" @input="inputVerify" :placeholder="placeholder" :disabled="disabled" @blur="blur" @focus="focus">
 				<ul class="x-tips-list" v-show="errorShow">
 					<li v-for="item in myVerify" :class="[{right:item.status}]">
 						<Sigh/>
@@ -15,11 +15,11 @@
 			</div>
 		</div>
 		<div v-else>
-			<input :class="[{error:errorShow},'x-input-self']" :type="type" :value="value" @input="inputVerify" :placeholder="placeholder" :disabled="disabled" @blur="$emit('blur',$event.target.value)" @focus="focus">
+			<input :class="[{error:errorShow},'x-input-self']" :type="type" v-model="value" @input="inputVerify" :placeholder="placeholder" :disabled="disabled" @blur="$emit('blur',$event.target.value)" @focus="focus">
 			<ul class="x-tips-list" v-show="errorShow">
-				<li v-for="item in myVerify">
+				<li v-for="item in myVerify" :class="[{right:item.status}]">
 					<Sigh/>
-					<p>{{item.text}}</p>
+					<p>{{item.text}} </p>
 				</li>
 			</ul>
 		</div>
@@ -39,10 +39,6 @@ export default{
 		type:{
 			type:String,
 			default:'text'
-		},
-		value:{
-			type:[Number,String],
-			default:''
 		},
 		placeholder:{
 			type:String,
@@ -65,6 +61,7 @@ export default{
 	},
 	data(){
 		return {
+			value:'',
 			errorText:'',
 			errorShow:false,
 			myVerify:this.verify,
@@ -72,17 +69,17 @@ export default{
 		}
 	},
 	methods:{
-		verifyCommon(val){
+		verifyCommon(){
 			this.myVerify.forEach((el,index)=>{
 				switch(el.type){
 					case 'required':
-						!val.length ? this.myVerify[index]['status'] = 0 : this.myVerify[index]['status'] = 1 
+						!this.value.length ? this.myVerify[index]['status'] = 0 : this.myVerify[index]['status'] = 1 
 					break;
 					case 'test':
-						 el.reg.test(val) ? this.myVerify[index]['status'] = 1 : this.myVerify[index]['status'] = 0
+						 el.reg.test(this.value) ? this.myVerify[index]['status'] = 1 : this.myVerify[index]['status'] = 0
 					break;
 					case 'length':
-						if(val.length>el.max || val.length<el.min){
+						if(this.value.length>el.max || this.value.length<el.min){
 							this.myVerify[index]['status'] = 0
 						}else{
 							this.myVerify[index]['status'] = 1
@@ -90,20 +87,18 @@ export default{
 					break;
 				}
 			})
-			
 			this.result = this.myVerify.every((el)=>el.status === 1)
 			this.errorShow = !this.result
 		},
 		blur(e){
-			let val = e.target.value
 
 			if(this.myVerify){
 				
-				this.verifyCommon(val)
+				this.verifyCommon()
 				
 				this.$emit('update:result',this.result)
 			}
-			this.$emit('blur',val)
+			this.$emit('blur',this.value)
 
 		},
 		focus(e){
@@ -112,11 +107,9 @@ export default{
 		},
 		inputVerify(e){
 
-			let val = e.target.value
+			if(this.myVerify){ this.verifyCommon() }
 
-			if(this.myVerify){ this.verifyCommon(val) }
-
-			this.$emit('input',e.target.value)
+			this.$emit('input',this.value)
 
 		}
 	},
@@ -139,11 +132,12 @@ export default{
 		display: block;
 		width:100%;
 		font-size: 14px;
-		line-height:34px;
+		line-height:32px;
 		text-indent:1em;
 		border:1px solid #e3e3e3;
 		border-radius:4px;
 		transition:.3s;
+    	box-sizing: border-box;
 		&:focus{
 			border-color:#409eff;
 		}
@@ -163,7 +157,7 @@ export default{
 	.x-input-aside{
 		padding-right: 10px;
 		float: left;
-		line-height:34px;
+		line-height:32px;
 		text-align:right;
 		box-sizing: border-box;
 	}
@@ -175,7 +169,7 @@ export default{
 	}
 	.x-tips-list{
 		li{
-			margin:12px 0;
+			margin:8px 0;
 			&:after{
 				content:"";
 				display:block;
@@ -190,6 +184,7 @@ export default{
 				float: left;
 				padding-top: 4px;
 				font-size: 14px;
+				color:#d91e18;
 			}
 		}
 		.right *{

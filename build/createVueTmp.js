@@ -2,7 +2,8 @@
 var path = require('path')
 var fs = require('fs')
 var program = require('commander')
-var ComponentName = 'Switch'
+var fileName = 'Form-item'
+var ComponentName = 'Textarea'
 
 // 创建packages下的资源
 fs.mkdirSync(path.resolve(__dirname, `../packages/${ComponentName}`))

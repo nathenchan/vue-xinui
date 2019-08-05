@@ -13,3 +13,18 @@
 .fadefast-enter, .fadefast-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
+
+// clear float
+.clear:after{
+	display: block;
+	content:'';
+	height:0;
+	visibility: hidden;
+	clear:both;
+}
+.float-l{
+	float: left;
+}
+.float-r{
+	float: right;
+}

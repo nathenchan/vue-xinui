@@ -1,19 +1,6 @@
 <template>
 	<div>
 
-		<div class="demo-pages">
-			<h3>checkbox 单独使用</h3>
-			<p class="tips">绑定一个值val1，根据状态设为true/false</p>
-			<div class="show-page">
-				<div class="demo-page">
-					<x-checkbox v-model="val1">
-						<template v-slot:text>文字</template>
-					</x-checkbox>
-				</div>
-			</div>
-			<source-page :tmpl="checkboxText"></source-page>
-	    </div>
-
 	    <div class="demo-pages">
 			<h3>多选框为一组</h3>
 			<p class="tips">使用checkbox组时，val为单独的checked值，选中时改变checklist，并且可以限制选择的个数</p>

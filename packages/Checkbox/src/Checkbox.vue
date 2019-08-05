@@ -14,6 +14,7 @@ import Right from './Right.vue'
 export default{
 	name:'x-checkbox',
 	components:{Right},
+	inject:['group'],
 	model:{
 		prop:'value',
 		event:'change'
@@ -46,26 +47,18 @@ export default{
 	},
 	methods:{
 		groupItemSetCheck(){
-			this.$parent.$attrs.value.includes(this.val) ?  this.itemCheck = true :  this.itemCheck = false
+			this.group.$attrs.value.includes(this.val) ?  this.itemCheck = true :  this.itemCheck = false
 		},
 		myChange(){
-			// 使用group组
-			if(this.val != null){
-				this.$parent.listChange(this.val)
-				this.$nextTick(function(){
-					this.groupItemSetCheck()
-				})
-			}else{ // 单独使用
-				if(!this.disabled){ this.$emit('change',!this.checked) }
-			}
+			this.group.listChange(this.val)
+			this.$nextTick(function(){
+				this.groupItemSetCheck()
+			})
 		}
 	},
 	created(){
-		// 如果是group组下使用
-		if(this.$parent.$attrs.value){
-			// 初始化勾选状态
-			this.groupItemSetCheck()
-		}
+		// 初始化勾选状态
+		this.groupItemSetCheck()
 	}
 }
 </script>
@@ -86,15 +79,15 @@ export default{
 	.x-checkbox-btn{
 		margin-right: 10px;
 		float: left;
-		width:16px;
-		height:16px;
+		width:20px;
+		height:20px;
 		border:1px solid #e3e3e3;
 		border-radius:4px;
 		overflow: hidden;
 	}
 	.x-checkbox-text{
 		float: left;
-		line-height: 18px;
+		line-height: 22px;
 		&.active{
 			color:#409eff;
 		}

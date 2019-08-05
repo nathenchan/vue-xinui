@@ -28,11 +28,13 @@
 					<p class="title">Form</p>
 					<ul>
 						<li><router-link to="/input">Input 输入框</router-link></li>
+						<li><router-link to="/textarea">textarea 文本域</router-link></li>
 						<li><router-link to="/radio">Radio 单选框</router-link></li>
 						<li><router-link to="/checkbox">Checkbox 多选框</router-link></li>
 						<li><router-link to="/select">Select 下拉菜单</router-link></li>
 						<li><router-link to="/switch">Switch 开关</router-link></li>
 						<li><router-link to="/location_select">LocationSelect 省市区选择</router-link></li>
+						<li><router-link to="/form">Form 表单</router-link></li>
 					</ul>
 				</div>
 
