@@ -30,10 +30,6 @@ module.exports = {
             'sass-loader',
             'postcss-loader'
           ]
-      },
-      {
-        test: /\.(png|svg|jpg|gif|woff2|woff|otf|eot|tff)$/,
-        use: [ 'file-loader?name=images/[name].[ext]' ]
       }
     ]
   },
@@ -49,9 +45,6 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '../lib/theme-chalk/[name].css'
     }),
-    // new webpack.DefinePlugin({
-    //   prod: JSON.stringify(true)
-    // }),
     new VueLoaderPlugin()
   ]
 }

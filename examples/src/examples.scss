@@ -145,8 +145,10 @@ a{
     margin-top: 0;
   }
   &>.tips{
-    margin:20px 0 ; 
-    line-height: 24px;
+    line-height: 28px;
+  }
+  h3{
+    margin-bottom: 20px;
   }
   .demo-btn-page,.demo-page{
     &:first-of-type{

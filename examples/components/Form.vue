@@ -2,17 +2,14 @@
 	<div>
 		<div class="demo-pages">
 			<h3>Form 表单</h3>
-			<p class="tips">required会给label加上*号标记，表示必填</p>
-			<p class="tips">关于验证，目前Input支持自定义验证规则</p>
-			<!-- 
-				form整体设计 
-				x-form-item required 显示必填*号   finish
-				大部分控件支持验证，显示报错信息 finish
-				result.sync绑定验证返回值，默认都为fasle，点击提交先判断此数组是否都为true  finish
-								
-				form有一个最终验证方法，点击所有不符合验证规则的都显示报错信息
-				子组件提供手动显示报错信息的方法
-			-->
+			<p class="tips">x-form-item的required会给label加上*号标记，result数组保存各个控件的验证结果，满足条件true反之false</p>
+			<p class="tips">验证方式：input使用verify属性传递一个以json为成员的数组，JSON的key{type,reg,text}，具体使用看verifyData。</br>
+			多选框组支持最少选择个数验证，用min字段跟required限制</br>
+			下拉选择菜单可以验证是否已选择，用required</br>
+			省市区选择同上，用required</br>
+			文本域目前支持验证是否已填写,用required</br>
+			除input组件外，以上几个表单组件的报错信息可以用error-text赋值，在验证返回false时显示
+			</p>
 			<div class="show-page">
 				<div class="demo-page">
 					<x-form label-width="90px" ref="form">

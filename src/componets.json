@@ -4,5 +4,5 @@
     "loading":"./packages/Loading/index.js",
     "dialog":"./packages/Dialog/index.js",
     "upload":"./packages/Upload/index.js",
-    "ring":"./packages/Ring/index.js"
+    "checkbox":"./packages/Checkbox/index.js"
 }
