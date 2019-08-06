@@ -1,7 +1,7 @@
 <template>
 	<div class="x-textarea">
-		<textarea v-model="val"  :maxlength="max" :minlength="min" @input="inputFn" @blur="$emit('blur',$event)"></textarea>
-		<p class="error-text" v-show="errorShow">请填写内容</p>
+		<textarea v-model="val" :maxlength="max" :minlength="min" @input="inputFn" @blur="blurFn"></textarea>
+		<p class="error-text" v-show="errorShow">{{errorText}}</p>
 	</div>
 </template>
 
@@ -20,6 +20,14 @@ export default{
 		}
 	},
 	props:{
+		errorText:{
+			type:String,
+			default:''
+		},
+		required:{
+			type:String,
+			default:undefined
+		},
 		max:{
 			type:String,
 			default:null
@@ -30,8 +38,23 @@ export default{
 		}
 	},
 	methods:{
+		checkVerify(){
+			if(this.required != undefined){
+				if(this.val.length){
+					this.errorShow = false 
+					this.$emit('update:result',true)
+				}else{
+					this.errorShow = true
+					this.$emit('update:result',false)
+				}
+			}
+		},
 		inputFn(){
 			this.$emit('change',this.val)
+		},
+		blurFn(e){
+			this.checkVerify()
+			this.$emit('blur',e)
 		}
 	}
 }

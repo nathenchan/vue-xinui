@@ -1,12 +1,15 @@
 <template>
-	<div class="x-select" @click="showList">
-		<p class="x-select-value">{{selectLabel}}</p>
-		<Arrow :class="{down:listShow}"/>
-		<transition name="fade">
-			<div class="x-select-list" v-show="listShow">
-				<x-option v-for="item in this.$slots.default" :key="item.componentOptions.propsData.value" :label="item.componentOptions.propsData.label" :value="item.componentOptions.propsData.value" @chose="update" />
-			</div>
-		</transition>
+	<div class="x-select" >
+		<div class="x-select-page" @click="showList">
+			<p class="x-select-value">{{selectLabel}}</p>
+			<Arrow :class="{down:listShow}"/>
+			<transition name="fade">
+				<div class="x-select-list" v-show="listShow">
+					<x-option v-for="item in this.$slots.default" :key="item.componentOptions.propsData.value" :label="item.componentOptions.propsData.label" :value="item.componentOptions.propsData.value" @chose="update" />
+				</div>
+			</transition>
+		</div>
+		<p class="error-text" v-show="errorShow">{{errorText}}</p>
 	</div>
 </template>
 
@@ -24,6 +27,14 @@ export default{
 		event:'change'
 	},
 	props:{
+		required:{
+			type:String,
+			default:undefined
+		},
+		errorText:{
+			type:String,
+			default:'选择其中一个'
+		},
 		placeholder:{
 			type:String,
 			default:'选择'
@@ -31,15 +42,28 @@ export default{
 	},
 	data(){
 		return {
-			listShow:false
+			listShow:false,
+			errorShow:false
 		}
 	},
 	methods:{
 		showList(){
 			this.listShow = !this.listShow
 		},
+		checkVerify(){
+			this.$nextTick(_=>{
+				if( this.required != undefined && !this.$attrs.value ){ 
+					this.errorShow = true
+					this.$emit('update:result',false)
+				}else if( this.required != undefined && this.$attrs.value ){
+					this.errorShow = false
+					this.$emit('update:result',true)
+				}
+			})
+		},
 		update(val){
 			this.$emit('change',val)
+			this.checkVerify()
 			this.listShow = false
 		}
 	},
@@ -63,19 +87,21 @@ export default{
 
 <style lang="scss">
 .x-select{
-	position: relative;
-	max-width:140px;
-	min-height:34px;
-	border:1px solid #e3e3e3;
-	border-radius:4px;
-	padding:8px 14px;
-	cursor: pointer;
-	box-sizing:border-box;
+	.x-select-page{
+		position: relative;
+		max-width:140px;
+		min-height:34px;
+		border:1px solid #e3e3e3;
+		border-radius:4px;
+		padding:6px 14px;
+		cursor: pointer;
+		box-sizing:border-box;
+		&:hover{
+			border:1px solid #409eff;
+		}
+	}
 	*{
 		user-select:none;
-	}
-	&:hover{
-		border:1px solid #409eff;
 	}
 }
 .x-select-list{
@@ -122,6 +148,10 @@ export default{
 	&.down{
 		transform:rotate(180deg);
 	}
+}
+.error-text{
+	margin-top:6px;
+	color:#d91e18;
 }
 
 .x-select{

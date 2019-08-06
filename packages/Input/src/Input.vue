@@ -15,7 +15,7 @@
 			</div>
 		</div>
 		<div v-else>
-			<input :class="[{error:errorShow},'x-input-self']" :type="type" v-model="value" @input="inputVerify" :placeholder="placeholder" :disabled="disabled" @blur="$emit('blur',$event.target.value)" @focus="focus">
+			<input :class="[{error:errorShow},'x-input-self']" :type="type" v-model="value" @input="inputVerify" :placeholder="placeholder" :disabled="disabled" @blur="blur" @focus="focus">
 			<ul class="x-tips-list" v-show="errorShow">
 				<li v-for="item in myVerify" :class="[{right:item.status}]">
 					<Sigh/>
@@ -69,7 +69,7 @@ export default{
 		}
 	},
 	methods:{
-		verifyCommon(){
+		checkVerify(){ // 校验数据，显示报错信息
 			this.myVerify.forEach((el,index)=>{
 				switch(el.type){
 					case 'required':
@@ -91,10 +91,9 @@ export default{
 			this.errorShow = !this.result
 		},
 		blur(e){
-
 			if(this.myVerify){
 				
-				this.verifyCommon()
+				this.checkVerify()
 				
 				this.$emit('update:result',this.result)
 			}
@@ -107,7 +106,7 @@ export default{
 		},
 		inputVerify(e){
 
-			if(this.myVerify){ this.verifyCommon() }
+			if(this.myVerify){ this.checkVerify() }
 
 			this.$emit('input',this.value)
 

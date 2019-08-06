@@ -3,7 +3,7 @@
 		<div class="demo-pages">
 			<h3>Form 表单</h3>
 			<p class="tips">required会给label加上*号标记，表示必填</p>
-			<p>关于验证，目前Input支持自定义验证规则</p>
+			<p class="tips">关于验证，目前Input支持自定义验证规则</p>
 			<!-- 
 				form整体设计 
 				x-form-item required 显示必填*号   finish
@@ -15,7 +15,7 @@
 			-->
 			<div class="show-page">
 				<div class="demo-page">
-					<x-form label-width="90px">
+					<x-form label-width="90px" ref="form">
 						<x-form-item required>
 							<x-form-label>昵称</x-form-label>
 							<x-form-control>
@@ -31,7 +31,7 @@
 						<x-form-item required>
 							<x-form-label>多选</x-form-label>
 							<x-form-control>
-								<x-checkbox-group v-model="form.checklist" min="2" :result.sync="verifyResult[2]" >
+								<x-checkbox-group v-model="form.checklist" min="2" :result.sync="verifyResult[2]" error-text="至少选2个" >
 									<x-checkbox val="sz">
 										<template v-slot:text>深圳</template>
 									</x-checkbox>
@@ -53,8 +53,8 @@
 						<x-form-item required>
 							<x-form-label>下拉选择</x-form-label>
 							<x-form-control>
-								<x-select v-model="form.selectValue" placeholder="下拉菜单">
-									<x-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
+								<x-select v-model="form.selectValue" placeholder="下拉菜单" error-text="至少选一个" required :result.sync="verifyResult[3]">
+									<x-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"  />
 								</x-select>
 							</x-form-control>
 						</x-form-item>
@@ -78,18 +78,18 @@
 						<x-form-item required>
 							<x-form-label>地址</x-form-label>
 							<x-form-control>
-								<x-location-select :location-data="locationData" v-model="form.locationVal"  />
+								<x-location-select :location-data="locationData" v-model="form.locationVal" error-text="选择完整地址" required :result.sync="verifyResult[4]" />
 							</x-form-control>
 						</x-form-item>
 						<x-form-item required>
 							<x-form-label>短评</x-form-label>
 							<x-form-control>
-								<x-textarea v-model="form.areaText"/>
+								<x-textarea v-model="form.areaText" error-text="填写短评" required :result.sync="verifyResult[5]" />
 							</x-form-control>
 						</x-form-item>
 						<x-form-item>
 							<x-form-control>
-								<x-button :btnStyle="{width:'80px',height:'30px',borderRadius:'6px',background:'#2196f3',color:'#fff'}" @click="consoleData">确定</x-button>
+								<x-button :btnStyle="{width:'80px',height:'30px',borderRadius:'6px',background:'#2196f3',color:'#fff'}" @click="SubForm">确定</x-button>
 							</x-form-control>
 						</x-form-item>
 					</x-form>
@@ -176,12 +176,13 @@ export default{
 				verifyData:[{type:'required',text:'必填'},{type:'test',reg:/[\d]+/,text:'含数字'},{type:'length',max:20,min:8,text:'8-20个字符'}],
 				verifyData2:[{type:'required',text:'必填'},{type:'test',reg:/[\d]+/,text:'含数字'},{type:'length',max:20,min:8,text:'8-20个字符'}]
 			},
-			verifyResult:[false,false,false]
+			verifyResult:[false,false,false,false,false,false]
 		}
 	},
 	methods:{
-		consoleData(){
-			console.log(this.form)
+		SubForm(){
+			let finallyResult = this.verifyResult.every(el=>el)
+			this.$refs.form.veifyAll()
 		}
 	}
 }

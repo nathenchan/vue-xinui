@@ -35,7 +35,7 @@
 				</div>
 			</div>
 		</div>
-		<p class="error-text" v-show="errorShow">请选择完整地址</p>
+		<p class="error-text" v-show="errorShow">{{errorText}}</p>
 	</div>
 </template>
 
@@ -47,6 +47,14 @@ export default{
 		event:'change'
 	},
 	props:{
+		required:{
+			type:String,
+			default:undefined
+		},
+		errorText:{
+			type:String,
+			default:'选择完整地址'
+		},
 		locationData:{
 			type:[Array,Object],
 			default:null
@@ -90,6 +98,21 @@ export default{
 		}
 	},
 	methods:{
+		checkVerify(){
+			//  是否有验证
+			if( this.required != undefined ){
+				if( !this.isMunicipality() && this.provinceName.length == 0 || this.cityName.length == 0 || this.areaName.length == 0 ){
+					this.errorShow = true
+					this.$emit('update:result',false)
+				}else if( this.isMunicipality() && this.provinceName.length == 0  || this.areaName.length == 0 ){
+					this.errorShow = true
+					this.$emit('update:result',false)
+				}else {
+					this.errorShow = false
+					this.$emit('update:result',true)
+				}
+			}
+		},
 		isMunicipality(){
 			if(this.provinceName.includes('北京') || this.provinceName.includes('天津市') || this.provinceName.includes('上海市') || this.provinceName.includes('重庆市')){
 				return true
@@ -98,6 +121,7 @@ export default{
 		},
 		update(){
 			this.isMunicipality() ?  this.$emit('change',this.fullName.slice(3)) : this.$emit('change',this.fullName)
+			this.checkVerify()
 		},
 		choseProvince(name){
 			this.provinceName = name
