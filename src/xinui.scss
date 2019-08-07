@@ -1,4 +1,8 @@
+// base styles
 /* fade */
+body{
+	color:#333;
+}
 .fade-enter-active, .fade-leave-active {
   transition: opacity .3s;
 }
