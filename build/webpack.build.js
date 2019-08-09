@@ -43,7 +43,7 @@ module.exports = {
       root: path.resolve(__dirname, '../')
     }),
     new MiniCssExtractPlugin({
-      filename: '../lib/theme-chalk/[name].css'
+      filename: '../lib/styles/[name].css'
     }),
     new VueLoaderPlugin()
   ]
