@@ -7,8 +7,11 @@ sass.render({
   file: path.resolve(__dirname, '../src/xinui.scss'),
   outputStyle: 'compressed'
 }, function(err, result) {
-	fs.writeFile(path.resolve(__dirname, '../lib/theme-chalk/base.css'), result.css.toString(),err => {
-	  if (err) throw err
-	  console.log('bass.css已生成')
-	})
+	let baseStyle = result.css.toString()
+	let indexStyle = fs.readFileSync(path.resolve(__dirname, '../lib/styles/index.css'), 'utf8')
+	// 基础样式，按需引入时使用
+	fs.writeFileSync(path.resolve(__dirname, '../lib/styles/base.css'),baseStyle)
+	// vue-xinui.css完整样式
+	fs.writeFileSync(path.resolve(__dirname, '../lib/styles/vue-xinui.css'), baseStyle+indexStyle)
 })
+
