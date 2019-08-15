@@ -7,7 +7,7 @@
 			</p>
 			<div class="show-page">
 				<div class="demo-btn-page">
-					<x-slide-verify @preload="fetchData" @finish="success" @error="verifyError" :maxError="3" :verifyData="slideverifyData" />
+					<x-slide-verify @preload="fetchData" @finish="success" @error="verifyError" :maxError="3" :verifyData="slideverifyData"  ref="pz"/>
 				</div>
 			</div>
 			<source-page :tmpl="slideVerifyText"></source-page>

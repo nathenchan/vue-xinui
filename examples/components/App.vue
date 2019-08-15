@@ -20,6 +20,7 @@
 						<li><router-link to="/count_down">CountDown 倒计时</router-link></li>
 						<li><router-link to="/pagination">Pagination 分页</router-link></li>
 						<li><router-link to="/image">Image 图片</router-link></li>
+						<!-- <li><router-link to="/slide">Slide 图片轮播</router-link></li> -->
 					</ul>
 				</div>
 
@@ -35,6 +36,14 @@
 						<li><router-link to="/switch">Switch 开关</router-link></li>
 						<li><router-link to="/location_select">LocationSelect 省市区选择</router-link></li>
 						<li><router-link to="/form">Form 表单</router-link></li>
+					</ul>
+				</div>
+
+				<div class="section-group">
+					<h2>常用方法</h2>
+					<p class="title">Methods</p>
+					<ul>
+						<li><router-link to="/url_params">UrlParams 路由参数</router-link></li>
 					</ul>
 				</div>
 

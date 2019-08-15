@@ -69,28 +69,30 @@
 				dragImgWidth:'',
 				loadingNum:0,
 				tipsText:'向右拖动滑块填充拼图',
-				dragImg:'',
-				dragBg:'',
 				dragImgShow:false,
 				dragBlockShow:true,
 				errorNum:0,
 				moveX:0,
-				dragVerify:null,
 				pictureIndex:0,
 				dragblockText:'&gt;&gt;', // &gt;&gt;
 				error:false,
 				success:false,
-				timer:null
+				timer:null,
+				dragImg:null,
+				dragVerify:null,
+				dragBlock:null,
+				dragBg:null
 			}
 		},
 		methods:{
 			init(){
-				var dragVerify = this.$el.querySelector('.dragverify'),
-					dragBlock = dragVerify.querySelector('.dragblock'),
-					dragBg = this.$el.querySelector('.dragbg'),
-					dragImg = this.$el.querySelector('.dragimg'),
-					maxLeft = dragVerify.clientWidth - dragBlock.offsetWidth,
-					tips = this.$el.querySelector('.picture-puzzle .tips'),
+				this.dragVerify = this.$el.querySelector('.dragverify')
+				this.dragBlock = this.dragVerify.querySelector('.dragblock')
+				this.dragImg = this.$el.querySelector('.dragimg')
+				this.dragBg = this.$el.querySelector('.dragbg')
+				this.tips = this.$el.querySelector('.picture-puzzle .tips')
+				
+				var maxLeft = this.dragVerify.clientWidth - this.dragBlock.offsetWidth,
 					moveX = 0,
 					pointsX = 0,
 					pageX = 0,
@@ -101,7 +103,7 @@
 					this.loadingNum++
 					if(this.loadingNum>=2){
 						setTimeout(_=>{
-							this.elWidth = dragBg.offsetWidth
+							this.elWidth = this.dragBg.offsetWidth
 							dx = (this.elWidth/this.verifyData.dragBgWidth)*this.verifyData.dx // 正确位置需要等比例缩放
 							this.dragImgWidth = (this.elWidth/this.verifyData.dragBgWidth)*this.verifyData.dragImgWidth // 碎片图尺寸等比例缩放
 							this.dragImgShow = true
@@ -109,8 +111,8 @@
 					}
 				}
 
-				dragBg.onload = imgLoad
-				dragImg.onload = imgLoad
+				this.dragBg.onload = imgLoad
+				this.dragImg.onload = imgLoad
 
 				var downFunc = '',
 					moveFunc = '',
@@ -134,49 +136,40 @@
 
 				}
 
-				dragBlock.addEventListener(downFunc,(event)=>{
+				this.dragBlock.addEventListener(downFunc,(event)=>{
 					clearTimeout(this.timer)
 					pageX = isWap() ? event.changedTouches[0].pageX : event.pageX
-					pointsX  = pageX - dragBlock.offsetLeft - dragVerify.offsetLeft
-					tips.style.display = 'none'
+					pointsX  = pageX - this.dragBlock.offsetLeft - this.dragVerify.offsetLeft
+					this.tips.style.display = 'none'
 					useTime = new Date().getTime()
 					document.addEventListener(moveFunc,moveScrollX,{ passive: false })
 					document.addEventListener(upFunc,dragFinish)
 				})
 
 				// 小拼图滑动
-				dragImg.addEventListener(downFunc,(event)=>{
+				this.dragImg.addEventListener(downFunc,(event)=>{
 					clearTimeout(this.timer)
 					pageX = isWap() ? event.changedTouches[0].pageX : event.pageX
-					pointsX  = pageX - dragBlock.offsetLeft - dragVerify.offsetLeft
-					tips.style.display = 'none'
+					pointsX  = pageX - this.dragBlock.offsetLeft - this.dragVerify.offsetLeft
+					this.tips.style.display = 'none'
 					document.addEventListener(moveFunc,moveScrollX,{ passive: false })
 					document.addEventListener(upFunc,dragFinish)
 				})
 
 				var moveScrollX =  (event) => {
 					pageX = isWap() ? event.touches[0].pageX : event.pageX
-					moveX = pageX - dragVerify.offsetLeft - pointsX
+					moveX = pageX - this.dragVerify.offsetLeft - pointsX
 					// 拖动范围最大值于最小值的判断
 					if( moveX <= 0 ){ moveX = 0 }
 					if( moveX >= maxLeft ){ moveX = maxLeft }
-					dragBlock.style.left = moveX+'px'
-					if( dragImg.offsetWidth + moveX > dragBg.offsetWidth ){
-						dragImg.style.left = ( dragBg.offsetWidth - dragImg.offsetWidth )+'px'
+					this.dragBlock.style.left = moveX+'px'
+					if( this.dragImg.offsetWidth + moveX > this.dragBg.offsetWidth ){
+						this.dragImg.style.left = ( this.dragBg.offsetWidth - this.dragImg.offsetWidth )+'px'
 					}else{
-						dragImg.style.left = moveX+'px'
+						this.dragImg.style.left = moveX+'px'
 					}
 					this.moveX = moveX
 					event.preventDefault()
-				}
-
-				var resetStatus = ()=>{
-					dragBlock.style.left = 0+'px' 
-					dragImg.style.left = 0+'px'
-					this.dragblockText = '&gt;&gt;'
-					this.error = false
-					this.success = false
-					tips.style.display = 'block'
 				}
 				
 				var dragFinish = event=>{
@@ -187,14 +180,14 @@
 					this.tipsText = ''
 					// 提示信息
 					if(moveX < 80 ){
-						tips.style.display = 'block'
+						this.tips.style.display = 'block'
 					}
 					// 拼图完成 接近即可
 					if( Math.abs(moveX - dx) < 6 && useTime > 300 ){
 						this.success = true
 						this.timer = setTimeout(_=>{
 							useTime = 0
-							resetStatus()
+							this.reset()
 							this.$emit('finish')
 						},500)
 					}else{
@@ -203,7 +196,7 @@
 						this.error = true
 						this.timer = setTimeout(_=>{
 							useTime = 0
-							resetStatus()
+							this.reset()
 							if(this.errorNum >= this.maxError){ // 错误次数过多
 								this.tipsText = '错误次数过多'
 								this.error = true
@@ -214,6 +207,14 @@
 						},300)
 					}
 				}
+			},
+			reset(){ // 手动重置拼图和块位置
+				this.dragBlock.style.left = 0+'px' 
+				this.dragImg.style.left = 0+'px'
+				this.dragblockText = '&gt;&gt;'
+				this.error = false
+				this.success = false
+				this.tips.style.display = 'block'
 			}
 		},
 		mounted(){

@@ -1,4 +1,4 @@
-import Loading from '../packages/Loading/index.js'
+// components
 import XButton from '../packages/Button/index.js'
 import Dialog from '../packages/Dialog/index.js'
 import SlideVerify from '../packages/SlideVerify/index.js'
@@ -20,6 +20,11 @@ import FormItem from '../packages/FormItem/index.js'
 import FormLabel from '../packages/FormLabel/index.js'
 import FormControl from '../packages/FormControl/index.js'
 import Textarea from '../packages/Textarea/index.js'
+import Slide from '../packages/Slide/index.js'
+// customer directive
+import Loading from '../packages/Loading/index.js'
+// prototype Methods
+import UrlParams from '../packages/UrlParams/index.js'
 
 var components = [
 	XButton,
@@ -41,7 +46,8 @@ var components = [
 	FormItem,
 	FormLabel,
 	FormControl,
-	Textarea
+	Textarea,
+	Slide
 ]
 
 function install(Vue){
@@ -50,6 +56,7 @@ function install(Vue){
 	})
 	Vue.use(Loading)
 	Vue.use(Ximage)
+	Vue.use(UrlParams)
 }
 
 if( typeof window !== undefined && window.Vue ){

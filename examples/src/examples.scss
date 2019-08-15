@@ -156,6 +156,11 @@ a{
     }
     margin:20px;
   }
+  .demo-page{
+    .texts{
+      line-height: 28px;
+    }
+  }
   .show-page{
     margin-top: 20px;
     padding:16px;
@@ -244,11 +249,8 @@ aside{
       font-size: 16px;
     }
   }
-  .nav-group-item~.section-group{
-    margin-top: 20px;
-  }
   .section-group{
-    margin-top: 10px;
+    margin-bottom: 30px;
     &:first-of-type{
       margin-top: 0;
     }

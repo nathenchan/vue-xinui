@@ -26,6 +26,8 @@ import LocationSelect from '../components/LocationSelect.vue'
 import Switch from '../components/Switch.vue'
 import Form from '../components/Form.vue'
 import Textarea from '../components/Textarea.vue'
+import Slide from '../components/Slide.vue'
+import UrlParams from '../components/UrlParams.vue'
 
 import xinui from '../../src/index.js'
 // import { XButton } from '../../src/index.js'
@@ -56,7 +58,9 @@ const routes = [
 	{ path:'/location_select',component:LocationSelect },
 	{ path:'/switch',component:Switch },
 	{ path:'/form',component:Form },
-	{ path:'/textarea',component:Textarea }
+	{ path:'/textarea',component:Textarea },
+	{ path:'/slide',component:Slide },
+	{ path:'/url_params',component:UrlParams }
 ]
 
 const router = new VueRouter({
