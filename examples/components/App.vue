@@ -20,7 +20,7 @@
 						<li><router-link to="/count_down">CountDown 倒计时</router-link></li>
 						<li><router-link to="/pagination">Pagination 分页</router-link></li>
 						<li><router-link to="/image">Image 图片</router-link></li>
-						<!-- <li><router-link to="/slide">Slide 图片轮播</router-link></li> -->
+						<li><router-link to="/slide">Slide 图片轮播</router-link></li>
 					</ul>
 				</div>
 

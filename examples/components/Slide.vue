@@ -60,7 +60,12 @@
 export default{
 	data(){
 		return {
-
+			imgData:[
+				{
+					alt:'',
+					src:''
+				}
+			]
 		}
 	}
 }
