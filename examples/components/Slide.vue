@@ -4,7 +4,9 @@
 			<h3></h3>
 			<div class="show-page">
 				<div class="demo-page">
-					<x-slide/>
+					<x-slide>
+						<li v-for="(item,index) in imgData">{{index}}</li>
+					</x-slide>
 				</div>
 			</div>
 			<!-- <source-page :tmpl=""></source-page> -->
@@ -61,6 +63,18 @@ export default{
 	data(){
 		return {
 			imgData:[
+				{
+					alt:'',
+					src:''
+				},
+				{
+					alt:'',
+					src:''
+				},
+				{
+					alt:'',
+					src:''
+				},
 				{
 					alt:'',
 					src:''
