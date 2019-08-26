@@ -1,9 +1,12 @@
 <template>
 	<div class="x-slide">
-		<ul class="x-slide-imgpage" :style="{width:slideWidth*(this.liLength+1)+'px'}">
+		<ul class="x-slide-imgpage" :style="{width:slideWidth*(this.liLength+2)+'px'}">
 			<slot/>
 		</ul>
-		<div class="x-slide-arrowbtn"></div>
+		<div class="x-slide-arrowbtn">
+			<span class="left-arrow" @click="moveLeft">左</span>
+			<div class="rigth-arrow" @click="moveRight">右</div>
+		</div>
 		<div class="x-slide-paginationbtn"></div>
 	</div>
 </template>
@@ -24,16 +27,52 @@ export default{
 			slide:null,
 			slideUl:null,
 			lis:null,
-			slideWidth:0,
+			slideWidth:0, // 父级宽度 = 1张图宽度
 			liLength:0,
+			moveNum:1,
+			onOff:true,
 			moveX:0
 		}
 	},
 	methods:{
-
+		init(){
+			this.slideUl.insertBefore(this.lis[this.lis.length-1].cloneNode(true),this.lis[0])
+			this.slideUl.appendChild(this.lis[0].cloneNode(true))
+			this.slideUl.style.transform = `translate(-${this.slideWidth}px,0)`
+		},
+		moveLeft(){
+			if(this.onOff){
+				this.slideUl.style.transition = '.3s'
+				this.onOff = false
+				this.moveX = --this.moveNum * this.slideWidth
+				this.slideUl.style.transform = `translate(${this.moveX}px,0)`
+			}
+		},
+		moveRight(){
+			if(this.onOff){
+				this.slideUl.style.transition = '.3s'
+				this.onOff = false
+				this.moveX = -(++this.moveNum * this.slideWidth)
+				this.slideUl.style.transform = `translate(${this.moveX}px,0)`
+			}
+		},
+		slideUlTransitionEnd(){ // ul切换动画后检测
+			this.slideUl.addEventListener('transitionend',e=>{
+				console.log(this.moveNum,this.liLength)
+				this.onOff = true
+				// if(this.moveNum == this.liLength){
+				// 	this.slideUl.style.transition = '.0s'
+				// 	this.moveNum = 1
+				// 	this.slideUl.style.transform = `translate(-${this.slideWidth}px,0)`
+				// 	this.onOff = true
+				// }else{
+				// 	this.onOff = true
+				// }
+			})
+		}
 	},
 	created(){
-
+		
 	},
 	mounted(){
 		this.slide = this.$el
@@ -41,8 +80,11 @@ export default{
 		this.slideUl = this.$el.querySelector('.x-slide-imgpage')
 		this.lis = this.slideUl.querySelectorAll('li')
 		this.liLength = this.lis.length
+		
+		// init
+		this.init()
 
-		this.slideUl.appendChild(this.lis[0].cloneNode(true))
+		this.slideUlTransitionEnd()
 	}
 }
 </script>
@@ -57,7 +99,6 @@ export default{
 		position: absolute;
 		left:0;
 		top:0;
-		width:1200px; //
 		&:after{
 			content:'';
 			display: block;
@@ -67,16 +108,34 @@ export default{
 		}
 		&>li{
 			float: left;
-			// 
 			width:300px;
 			height:140px;
 			text-align: center;
 			line-height:140px;
 			color:#fff;
-			&:nth-of-type(1){background:#000;}
-			&:nth-of-type(2){background:#abcdef;}
+			&:nth-of-type(1){background:blue;}
+			&:nth-of-type(2){background:#000;}
 			&:nth-of-type(3){background:red;}
-			&:nth-of-type(4){background:blue;}
+			&:nth-of-type(4){background:yellow;}
+			&:nth-of-type(5){background:blue;}
+			&:nth-of-type(6){background:#000;}
+		}
+	}
+	.x-slide-arrowbtn{
+		position: absolute;
+		width: 100%;
+		top:45%;
+		.left-arrow,.rigth-arrow{
+			position: absolute;
+			top:0;
+			width:20px;
+			background:#fff;
+		}
+		.left-arrow{
+			left:0;
+		}
+		.rigth-arrow{
+			right:0;
 		}
 	}
 }
