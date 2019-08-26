@@ -1,6 +1,6 @@
 <template>
 	<div class="x-slide">
-		<ul class="x-slide-imgpage" :style="{width:slideWidth*(this.liLength+2)+'px'}">
+		<ul class="x-slide-imgpage" :style="{width:ulWidth+'px'}">
 			<slot/>
 		</ul>
 		<div class="x-slide-arrowbtn">
@@ -28,6 +28,7 @@ export default{
 			slideUl:null,
 			lis:null,
 			slideWidth:0, // 父级宽度 = 1张图宽度
+			ulWidth:0,
 			liLength:0,
 			moveNum:1,
 			onOff:true,
@@ -38,13 +39,14 @@ export default{
 		init(){
 			this.slideUl.insertBefore(this.lis[this.lis.length-1].cloneNode(true),this.lis[0])
 			this.slideUl.appendChild(this.lis[0].cloneNode(true))
+			this.ulWidth = (this.liLength+2)*this.slideWidth
 			this.slideUl.style.transform = `translate(-${this.slideWidth}px,0)`
 		},
 		moveLeft(){
 			if(this.onOff){
-				this.slideUl.style.transition = '.3s'
 				this.onOff = false
-				this.moveX = --this.moveNum * this.slideWidth
+				this.slideUl.style.transition = '.3s'
+				this.moveX = -(--this.moveNum * this.slideWidth)
 				this.slideUl.style.transform = `translate(${this.moveX}px,0)`
 			}
 		},
@@ -58,21 +60,21 @@ export default{
 		},
 		slideUlTransitionEnd(){ // ul切换动画后检测
 			this.slideUl.addEventListener('transitionend',e=>{
-				console.log(this.moveNum,this.liLength)
-				this.onOff = true
-				// if(this.moveNum == this.liLength){
-				// 	this.slideUl.style.transition = '.0s'
-				// 	this.moveNum = 1
-				// 	this.slideUl.style.transform = `translate(-${this.slideWidth}px,0)`
-				// 	this.onOff = true
-				// }else{
-				// 	this.onOff = true
-				// }
+				if(this.moveNum == 0){
+					this.slideUl.style.transition = '.0s'
+					this.moveNum = this.liLength
+					this.slideUl.style.transform = `translate(-${this.slideWidth*this.liLength}px,0)`
+					this.onOff = true
+				}else if(this.moveNum == this.liLength+1){
+					this.slideUl.style.transition = '.0s'
+					this.moveNum = 1
+					this.slideUl.style.transform = `translate(-${this.slideWidth}px,0)`
+					this.onOff = true
+				}else{
+					this.onOff = true
+				}
 			})
 		}
-	},
-	created(){
-		
 	},
 	mounted(){
 		this.slide = this.$el
@@ -119,6 +121,7 @@ export default{
 			&:nth-of-type(4){background:yellow;}
 			&:nth-of-type(5){background:blue;}
 			&:nth-of-type(6){background:#000;}
+			&:nth-of-type(7){background:#abcdef;}
 		}
 	}
 	.x-slide-arrowbtn{

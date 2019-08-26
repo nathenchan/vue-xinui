@@ -78,7 +78,11 @@ export default{
 				{
 					alt:'',
 					src:''
-				}
+				},
+				{
+					alt:'',
+					src:''
+				},
 			]
 		}
 	}
