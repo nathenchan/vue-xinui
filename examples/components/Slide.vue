@@ -5,7 +5,7 @@
 			<div class="show-page">
 				<div class="demo-page">
 					<x-slide>
-						<li v-for="(item,index) in imgData">{{index}}</li>
+						<li v-for="(item,index) in imgData"><img :src="item.src"></li>
 					</x-slide>
 				</div>
 			</div>
@@ -65,23 +65,23 @@ export default{
 			imgData:[
 				{
 					alt:'',
-					src:''
+					src:'http://img4.imgtn.bdimg.com/it/u=1102601247,263564605&fm=26&gp=0.jpg'
 				},
 				{
 					alt:'',
-					src:''
+					src:'http://img5.imgtn.bdimg.com/it/u=3846716641,4070627816&fm=26&gp=0.jpg'
 				},
 				{
 					alt:'',
-					src:''
+					src:'http://img2.imgtn.bdimg.com/it/u=1794041649,1170847055&fm=26&gp=0.jpg'
 				},
 				{
 					alt:'',
-					src:''
+					src:'http://img1.imgtn.bdimg.com/it/u=3591372842,2390059023&fm=26&gp=0.jpg'
 				},
 				{
 					alt:'',
-					src:''
+					src:'http://img1.imgtn.bdimg.com/it/u=3038724624,1635659369&fm=26&gp=0.jpg'
 				},
 			]
 		}

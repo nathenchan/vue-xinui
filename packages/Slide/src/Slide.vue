@@ -7,7 +7,9 @@
 			<span class="left-arrow" @click="moveLeft">左</span>
 			<div class="rigth-arrow" @click="moveRight">右</div>
 		</div>
-		<div class="x-slide-paginationbtn"></div>
+		<ul class="x-slide-paginationbtn">
+			<li v-for="(item,index) in sourceLength" :class="[{'active':index==roundNum}]" @click="moveUL(index)"></li>
+		</ul>
 	</div>
 </template>
 
@@ -29,8 +31,10 @@ export default{
 			lis:null,
 			slideWidth:0, // 父级宽度 = 1张图宽度
 			ulWidth:0,
-			liLength:0,
+			liLength:0, // 拷贝后的li数
+			sourceLength:0, // 拷贝前li数
 			moveNum:1,
+			roundNum:0,
 			onOff:true,
 			moveX:0
 		}
@@ -39,13 +43,21 @@ export default{
 		init(){
 			this.slideUl.insertBefore(this.lis[this.lis.length-1].cloneNode(true),this.lis[0])
 			this.slideUl.appendChild(this.lis[0].cloneNode(true))
-			this.ulWidth = (this.liLength+2)*this.slideWidth
+			this.ulWidth = (this.liLength)*this.slideWidth
 			this.slideUl.style.transform = `translate(-${this.slideWidth}px,0)`
+		},
+		moveUL(index){
+			this.onOff = false
+			this.slideUl.style.transition = '.3s'
+			this.moveNum = index+1
+			this.roundNum = index
+			this.slideUl.style.transform = `translate(-${this.moveNum*this.slideWidth}px,0)`
 		},
 		moveLeft(){
 			if(this.onOff){
 				this.onOff = false
 				this.slideUl.style.transition = '.3s'
+				this.roundNum == 0 ? this.roundNum = this.sourceLength-1 : this.roundNum--
 				this.moveX = -(--this.moveNum * this.slideWidth)
 				this.slideUl.style.transform = `translate(${this.moveX}px,0)`
 			}
@@ -54,18 +66,19 @@ export default{
 			if(this.onOff){
 				this.slideUl.style.transition = '.3s'
 				this.onOff = false
+				this.roundNum = this.moveNum%this.sourceLength
 				this.moveX = -(++this.moveNum * this.slideWidth)
 				this.slideUl.style.transform = `translate(${this.moveX}px,0)`
 			}
 		},
 		slideUlTransitionEnd(){ // ul切换动画后检测
 			this.slideUl.addEventListener('transitionend',e=>{
-				if(this.moveNum == 0){
+				if(this.moveNum == 0){ // 到达最后一张Loop位
 					this.slideUl.style.transition = '.0s'
-					this.moveNum = this.liLength
-					this.slideUl.style.transform = `translate(-${this.slideWidth*this.liLength}px,0)`
+					this.moveNum = this.sourceLength
+					this.slideUl.style.transform = `translate(-${this.slideWidth*(this.sourceLength)}px,0)`
 					this.onOff = true
-				}else if(this.moveNum == this.liLength+1){
+				}else if(this.moveNum == this.liLength-1){ // 到达第一张Loop位
 					this.slideUl.style.transition = '.0s'
 					this.moveNum = 1
 					this.slideUl.style.transform = `translate(-${this.slideWidth}px,0)`
@@ -81,8 +94,8 @@ export default{
 		this.slideWidth = this.slide.offsetWidth
 		this.slideUl = this.$el.querySelector('.x-slide-imgpage')
 		this.lis = this.slideUl.querySelectorAll('li')
-		this.liLength = this.lis.length
-		
+		this.liLength = this.lis.length+2
+		this.sourceLength = this.lis.length
 		// init
 		this.init()
 
@@ -115,13 +128,10 @@ export default{
 			text-align: center;
 			line-height:140px;
 			color:#fff;
-			&:nth-of-type(1){background:blue;}
-			&:nth-of-type(2){background:#000;}
-			&:nth-of-type(3){background:red;}
-			&:nth-of-type(4){background:yellow;}
-			&:nth-of-type(5){background:blue;}
-			&:nth-of-type(6){background:#000;}
-			&:nth-of-type(7){background:#abcdef;}
+			img{
+				width:100%;
+				height:100%;
+			}
 		}
 	}
 	.x-slide-arrowbtn{
@@ -139,6 +149,33 @@ export default{
 		}
 		.rigth-arrow{
 			right:0;
+		}
+	}
+	.x-slide-paginationbtn{
+		position: absolute;
+		left:0;
+		width:100%;
+		bottom:10px;
+		text-align: center;
+		&:after{
+			content:'';
+			display: block;
+			height:0;
+			visibility: hidden;
+			clear:both;
+		}
+		li{
+			display: inline-block;
+			margin:0 2px;
+			width:8px;
+			height:8px;
+			background:#e3e3e3;
+			border-radius: 4px;
+			overflow: hidden;
+			cursor: pointer;
+		}
+		li.active{
+			background:#409EFF;
 		}
 	}
 }
