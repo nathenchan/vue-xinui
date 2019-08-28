@@ -14,7 +14,7 @@
 </template>
 
 <script>
-// import {getStyle} from '../../../src/utils/dom.js'
+import {getStyle} from '../../../src/utils/dom.js'
 /**
  * pc wap 事件
  * 左右箭头+圆点点击
@@ -40,7 +40,8 @@ export default{
 			moveX:0,
 			// wap
 			startX:0,
-			disX:0
+			disX:0,
+			lastX:0
 		}
 	},
 	methods:{
@@ -53,22 +54,27 @@ export default{
 		},
 		mobile(){ //移动端事件
 			this.slide.addEventListener('touchstart',e=>{
+				this.slideUl.style.transition = '.0s'
+				this.lastX = getStyle(this.slideUl,'transform')['translateX']
 				this.startX = e.touches[0].clientX
 				e.preventDefault()
-			})
-			this.slide.addEventListener('touchmove',e=>{
-				this.disX = parseInt(e.touches[0].clientX - this.startX)*.4
-				this.slideUl.style.transform = `translate(${(this.disX+this.moveX)}px,0)`
-				e.preventDefault()
-			})
-			this.slide.addEventListener('touchend',e=>{
-				// 滑动幅度大则切换
-				if(Math.abs(this.disX) >= 30){
-					this.disX > 0 ? this.moveLeft() : this.moveRight()
-				}else{
-					Math.abs(this.disX) >= 30
-				}
-				e.preventDefault()
+
+				this.slide.addEventListener('touchmove',e=>{
+					this.disX =  parseInt((e.touches[0].clientX - this.startX)*.4)
+					console.log(this.disX)
+					this.slideUl.style.transform = `translate(${(this.disX+this.moveX)}px,0)`
+					e.preventDefault()
+				})
+				this.slide.addEventListener('touchend',e=>{
+					// 滑动幅度大则切换
+					if(Math.abs(this.disX) >= 30){
+						this.disX > 0 ? this.moveLeft() : this.moveRight()
+					}else{
+						this.slideUl.style.transition = '.3s'
+						this.slideUl.style.transform = `translate(${(this.lastX)}px,0)`
+					}
+					e.preventDefault()
+				})
 			})
 		},
 		moveUL(index){
@@ -113,7 +119,6 @@ export default{
 				}else{
 					this.onOff = true
 				}
-
 			})
 		}
 	},
