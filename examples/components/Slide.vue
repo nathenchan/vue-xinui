@@ -78,11 +78,7 @@ export default{
 				{
 					alt:'',
 					src:'http://img1.imgtn.bdimg.com/it/u=3591372842,2390059023&fm=26&gp=0.jpg'
-				},
-				{
-					alt:'',
-					src:'http://img1.imgtn.bdimg.com/it/u=3038724624,1635659369&fm=26&gp=0.jpg'
-				},
+				}
 			]
 		}
 	}

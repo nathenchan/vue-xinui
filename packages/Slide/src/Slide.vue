@@ -14,6 +14,7 @@
 </template>
 
 <script>
+// import {getStyle} from '../../../src/utils/dom.js'
 /**
  * pc wap 事件
  * 左右箭头+圆点点击
@@ -36,7 +37,10 @@ export default{
 			moveNum:1,
 			roundNum:0,
 			onOff:true,
-			moveX:0
+			moveX:0,
+			// wap
+			startX:0,
+			disX:0
 		}
 	},
 	methods:{
@@ -44,7 +48,28 @@ export default{
 			this.slideUl.insertBefore(this.lis[this.lis.length-1].cloneNode(true),this.lis[0])
 			this.slideUl.appendChild(this.lis[0].cloneNode(true))
 			this.ulWidth = (this.liLength)*this.slideWidth
+			this.moveX = -this.slideWidth
 			this.slideUl.style.transform = `translate(-${this.slideWidth}px,0)`
+		},
+		mobile(){ //移动端事件
+			this.slide.addEventListener('touchstart',e=>{
+				this.startX = e.touches[0].clientX
+				e.preventDefault()
+			})
+			this.slide.addEventListener('touchmove',e=>{
+				this.disX = parseInt(e.touches[0].clientX - this.startX)*.4
+				this.slideUl.style.transform = `translate(${(this.disX+this.moveX)}px,0)`
+				e.preventDefault()
+			})
+			this.slide.addEventListener('touchend',e=>{
+				// 滑动幅度大则切换
+				if(Math.abs(this.disX) >= 30){
+					this.disX > 0 ? this.moveLeft() : this.moveRight()
+				}else{
+					Math.abs(this.disX) >= 30
+				}
+				e.preventDefault()
+			})
 		},
 		moveUL(index){
 			this.onOff = false
@@ -77,15 +102,18 @@ export default{
 					this.slideUl.style.transition = '.0s'
 					this.moveNum = this.sourceLength
 					this.slideUl.style.transform = `translate(-${this.slideWidth*(this.sourceLength)}px,0)`
+					this.moveX = -(this.slideWidth*(this.sourceLength))
 					this.onOff = true
 				}else if(this.moveNum == this.liLength-1){ // 到达第一张Loop位
 					this.slideUl.style.transition = '.0s'
 					this.moveNum = 1
 					this.slideUl.style.transform = `translate(-${this.slideWidth}px,0)`
+					this.moveX = -this.slideWidth
 					this.onOff = true
 				}else{
 					this.onOff = true
 				}
+
 			})
 		}
 	},
@@ -100,6 +128,8 @@ export default{
 		this.init()
 
 		this.slideUlTransitionEnd()
+		// mobile event
+		this.mobile()
 	}
 }
 </script>
@@ -128,6 +158,7 @@ export default{
 			text-align: center;
 			line-height:140px;
 			color:#fff;
+			overflow: hidden;
 			img{
 				width:100%;
 				height:100%;
