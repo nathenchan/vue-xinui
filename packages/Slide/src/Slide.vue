@@ -41,7 +41,8 @@ export default{
 			// wap
 			startX:0,
 			disX:0,
-			lastX:0
+			UlNowX:0,
+			transiting:false
 		}
 	},
 	methods:{
@@ -55,26 +56,30 @@ export default{
 		mobile(){ //移动端事件
 			this.slide.addEventListener('touchstart',e=>{
 				this.slideUl.style.transition = '.0s'
-				this.lastX = getStyle(this.slideUl,'transform')['translateX']
+				this.UlNowX = getStyle(this.slideUl,'transform')['translateX']
 				this.startX = e.touches[0].clientX
 				e.preventDefault()
-
-				this.slide.addEventListener('touchmove',e=>{
-					this.disX =  parseInt((e.touches[0].clientX - this.startX)*.4)
-					console.log(this.disX)
-					this.slideUl.style.transform = `translate(${(this.disX+this.moveX)}px,0)`
-					e.preventDefault()
-				})
-				this.slide.addEventListener('touchend',e=>{
-					// 滑动幅度大则切换
-					if(Math.abs(this.disX) >= 30){
+			})
+			this.slide.addEventListener('touchmove',e=>{
+				this.disX =  parseInt((e.touches[0].clientX - this.startX)*.4)
+				this.slideUl.style.transform = `translate(${(this.disX+this.UlNowX)}px,0)`
+				e.preventDefault()
+			})
+			this.slide.addEventListener('touchend',e=>{
+				// 滑动幅度大则切换
+				if(Math.abs(this.disX) >= 30){
+					if(this.onOff){
 						this.disX > 0 ? this.moveLeft() : this.moveRight()
-					}else{
+					}else{ // 快速中断又拖拽
 						this.slideUl.style.transition = '.3s'
-						this.slideUl.style.transform = `translate(${(this.lastX)}px,0)`
+						this.slideUl.style.transform = `translate(${(this.moveX)}px,0)`
 					}
-					e.preventDefault()
-				})
+				}else if(this.disX != 0){ // 小幅挪动回到原位	
+					this.slideUl.style.transition = '.3s'
+					this.slideUl.style.transform = `translate(${(this.moveX)}px,0)`
+				}
+				this.disX = 0
+				e.preventDefault()
 			})
 		},
 		moveUL(index){
@@ -95,8 +100,8 @@ export default{
 		},
 		moveRight(){
 			if(this.onOff){
-				this.slideUl.style.transition = '.3s'
 				this.onOff = false
+				this.slideUl.style.transition = '.3s'
 				this.roundNum = this.moveNum%this.sourceLength
 				this.moveX = -(++this.moveNum * this.slideWidth)
 				this.slideUl.style.transform = `translate(${this.moveX}px,0)`
@@ -107,14 +112,14 @@ export default{
 				if(this.moveNum == 0){ // 到达最后一张Loop位
 					this.slideUl.style.transition = '.0s'
 					this.moveNum = this.sourceLength
-					this.slideUl.style.transform = `translate(-${this.slideWidth*(this.sourceLength)}px,0)`
 					this.moveX = -(this.slideWidth*(this.sourceLength))
+					this.slideUl.style.transform = `translate(${this.moveX}px,0)`
 					this.onOff = true
 				}else if(this.moveNum == this.liLength-1){ // 到达第一张Loop位
 					this.slideUl.style.transition = '.0s'
 					this.moveNum = 1
-					this.slideUl.style.transform = `translate(-${this.slideWidth}px,0)`
 					this.moveX = -this.slideWidth
+					this.slideUl.style.transform = `translate(${this.moveX}px,0)`
 					this.onOff = true
 				}else{
 					this.onOff = true

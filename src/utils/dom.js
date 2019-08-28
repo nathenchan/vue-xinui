@@ -4,7 +4,7 @@ const getStyle = function(el,attr){
 		let attrStr = window.getComputedStyle(el)[attr],
 			attrArr = attrStr.slice(7).slice(0,attrStr.length-1).split(', ')
 			return {
-				translateX: attrArr[4]
+				translateX: parseInt(attrArr[4])
 			}
 		break;
 	}

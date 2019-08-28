@@ -65,19 +65,22 @@ export default{
 			imgData:[
 				{
 					alt:'',
-					src:'http://img4.imgtn.bdimg.com/it/u=1102601247,263564605&fm=26&gp=0.jpg'
+					src:'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1944845135,280224577&fm=26&gp=0.jpg'
 				},
 				{
 					alt:'',
-					src:'http://img5.imgtn.bdimg.com/it/u=3846716641,4070627816&fm=26&gp=0.jpg'
+					src:'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1289981276,3794620975&fm=26&gp=0.jpg'
 				},
 				{
 					alt:'',
-					src:'http://img2.imgtn.bdimg.com/it/u=1794041649,1170847055&fm=26&gp=0.jpg'
+					src:'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2871893164,592906384&fm=26&gp=0.jpg'
 				},
 				{
 					alt:'',
-					src:'http://img1.imgtn.bdimg.com/it/u=3591372842,2390059023&fm=26&gp=0.jpg'
+					src:'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2868140583,532600119&fm=26&gp=0.jpg'
+				},
+				{
+					src:'https://aecpm.alicdn.com/simba/img/TB1CWf9KpXXXXbuXpXXSutbFXXX.jpg_q50.jpg'
 				}
 			]
 		}
