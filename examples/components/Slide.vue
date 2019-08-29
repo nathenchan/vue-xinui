@@ -5,7 +5,7 @@
 			<div class="show-page">
 				<div class="demo-page">
 					<x-slide>
-						<li v-for="(item,index) in imgData"><img :src="item.src"></li>
+						<li class="content-li" v-for="(item,index) in imgData"><img :src="item.src"></li>
 					</x-slide>
 				</div>
 			</div>
@@ -89,5 +89,11 @@ export default{
 </script>
 
 <style lang="scss">
-	
+.x-slide{
+	width:300px;
+	height:140px;
+	.content-li{
+		width:300px;
+	}
+}
 </style>

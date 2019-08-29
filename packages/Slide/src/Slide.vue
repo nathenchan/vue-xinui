@@ -3,10 +3,10 @@
 		<ul class="x-slide-imgpage" :style="{width:ulWidth+'px'}">
 			<slot/>
 		</ul>
-		<!-- <div class="x-slide-arrowbtn">
+		<div class="x-slide-arrowbtn">
 			<span class="left-arrow" @click="moveLeft">左</span>
 			<div class="rigth-arrow" @click="moveRight">右</div>
-		</div> -->
+		</div>
 		<ul class="x-slide-paginationbtn">
 			<li v-for="(item,index) in sourceLength" :class="[{'active':index==roundNum}]" @click="moveUL(index)"></li>
 		</ul>
@@ -18,13 +18,27 @@ import {getStyle} from '../../../src/utils/dom.js'
 /**
  * pc wap 事件
  * 左右箭头+圆点点击
- * 图片lazy load
- * 类型：单张，3d
+ * 定时器
  * 数据传输
  * 图片 or 其他内容
  */
 export default{
 	name:'x-slide',
+	inheritAttrs:false,
+	props:{
+		autoPlay:{
+			type:Boolean,
+			default:true
+		},
+		transitionTime:{
+			type:String,
+			default:'.3s'
+		},
+		intervalTime:{
+			type:Number,
+			default:3000
+		}
+	},
 	data(){
 		return {
 			xArr:[], // 位置数组
@@ -39,6 +53,7 @@ export default{
 			roundNum:0,
 			onOff:true,
 			moveX:0,
+			timer:null,
 			// wap
 			startX:0,
 			disX:0,
@@ -49,6 +64,12 @@ export default{
 	},
 	methods:{
 		init(){
+			this.slide = this.$el
+			this.slideWidth = this.slide.offsetWidth
+			this.slideUl = this.$el.querySelector('.x-slide-imgpage')
+			this.lis = this.slideUl.querySelectorAll('li')
+			this.liLength = this.lis.length+2
+			this.sourceLength = this.lis.length
 			this.slideUl.insertBefore(this.lis[this.lis.length-1].cloneNode(true),this.lis[0])
 			this.slideUl.appendChild(this.lis[0].cloneNode(true))
 			this.ulWidth = (this.liLength)*this.slideWidth
@@ -63,6 +84,7 @@ export default{
 			 * 动画执行时不能拖拽
 			 */
 			this.slide.addEventListener('touchstart',e=>{
+				clearInterval(this.timer)
 				if(!this.transiting){
 					this.isStart = true
 					this.slideUl.style.transition = '.0s'
@@ -72,6 +94,7 @@ export default{
 				e.preventDefault()
 			})
 			this.slide.addEventListener('touchmove',e=>{
+				clearInterval(this.timer)
 				if(!this.transiting && this.isStart){ // 动画时不能拖拽，并且是正常点击触发，因为有可能动画结束时手指仍在拖动
 					this.disX =  parseInt((e.touches[0].clientX - this.startX)*.4)
 					this.slideUl.style.transform = `translate(${(this.disX+this.UlNowX)}px,0)`
@@ -85,10 +108,11 @@ export default{
 					if(Math.abs(this.disX) >= 30){ // 滑动幅度大则切换
 						this.disX > 0 ? this.moveLeft() : this.moveRight()
 					}else if(this.disX != 0){ // 小幅挪动回到原位	
-						this.slideUl.style.transition = '.2s'
+						this.slideUl.style.transition = this.transitionTime
 						this.slideUl.style.transform = `translate(${(this.moveX)}px,0)`
 					}else if(this.disX == 0 && this.xArr.includes(this.moveX)){ // 点击
 						this.transiting = false
+						if(this.autoPlay){this.autoLoop()}
 					}
 					this.disX = 0
 				}
@@ -96,27 +120,30 @@ export default{
 			})
 		},
 		moveUL(index){
+			clearInterval(this.timer)
 			this.onOff = false
-			this.slideUl.style.transition = '.2s'
+			this.slideUl.style.transition = this.transitionTime
 			this.moveNum = index+1
 			this.roundNum = index
 			this.slideUl.style.transform = `translate(-${this.moveNum*this.slideWidth}px,0)`
 		},
 		moveLeft(){
+			clearInterval(this.timer)
 			if(this.onOff){
 				this.onOff = false
 				this.transiting = true
-				this.slideUl.style.transition = '.2s'
+				this.slideUl.style.transition = this.transitionTime
 				this.roundNum == 0 ? this.roundNum = this.sourceLength-1 : this.roundNum--
 				this.moveX = -(--this.moveNum * this.slideWidth)
 				this.slideUl.style.transform = `translate(${this.moveX}px,0)`
 			}
 		},
 		moveRight(){
+			clearInterval(this.timer)
 			if(this.onOff){
 				this.onOff = false
 				this.transiting = true
-				this.slideUl.style.transition = '.2s'
+				this.slideUl.style.transition = this.transitionTime
 				this.roundNum = this.moveNum%this.sourceLength
 				this.moveX = -(++this.moveNum * this.slideWidth)
 				this.slideUl.style.transform = `translate(${this.moveX}px,0)`
@@ -131,6 +158,7 @@ export default{
 					this.slideUl.style.transform = `translate(${this.moveX}px,0)`
 					this.onOff = true
 					this.transiting = false
+					if(this.autoPlay){this.autoLoop()}
 				}else if(this.moveNum == this.liLength-1){ // 到达第一张Loop位
 					this.slideUl.style.transition = '.0s'
 					this.moveNum = 1
@@ -138,24 +166,25 @@ export default{
 					this.slideUl.style.transform = `translate(${this.moveX}px,0)`
 					this.onOff = true
 					this.transiting = false
+					if(this.autoPlay){this.autoLoop()}
 				}else{
 					this.onOff = true
 					this.transiting = false
+					if(this.autoPlay){this.autoLoop()}
 				}
 			})
+		},
+		autoLoop(){
+			clearInterval(this.timer)
+			this.timer=setInterval(_=>{
+				this.moveRight()
+			},this.intervalTime)
 		}
 	},
 	mounted(){
-		this.slide = this.$el
-		this.slideWidth = this.slide.offsetWidth
-		this.slideUl = this.$el.querySelector('.x-slide-imgpage')
-		this.lis = this.slideUl.querySelectorAll('li')
-		this.liLength = this.lis.length+2
-		this.sourceLength = this.lis.length
-		// init
 		this.init()
-
 		this.slideUlTransitionEnd()
+		if(this.autoPlay){this.autoLoop()}
 		// mobile event
 		this.mobile()
 	}
@@ -165,13 +194,12 @@ export default{
 <style lang="scss">
 .x-slide{
 	position: relative;
-	width:300px;
-	height:140px;
 	overflow: hidden;
 	.x-slide-imgpage{
 		position: absolute;
 		left:0;
 		top:0;
+		height:100%;
 		&:after{
 			content:'';
 			display: block;
@@ -181,10 +209,8 @@ export default{
 		}
 		&>li{
 			float: left;
-			width:300px;
-			height:140px;
+			height:100%;
 			text-align: center;
-			line-height:140px;
 			color:#fff;
 			overflow: hidden;
 			img{
