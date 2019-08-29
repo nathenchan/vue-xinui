@@ -3,10 +3,10 @@
 		<ul class="x-slide-imgpage" :style="{width:ulWidth+'px'}">
 			<slot/>
 		</ul>
-		<div class="x-slide-arrowbtn">
+		<!-- <div class="x-slide-arrowbtn">
 			<span class="left-arrow" @click="moveLeft">左</span>
 			<div class="rigth-arrow" @click="moveRight">右</div>
-		</div>
+		</div> -->
 		<ul class="x-slide-paginationbtn">
 			<li v-for="(item,index) in sourceLength" :class="[{'active':index==roundNum}]" @click="moveUL(index)"></li>
 		</ul>
@@ -27,6 +27,7 @@ export default{
 	name:'x-slide',
 	data(){
 		return {
+			xArr:[], // 位置数组
 			slide:null,
 			slideUl:null,
 			lis:null,
@@ -42,7 +43,8 @@ export default{
 			startX:0,
 			disX:0,
 			UlNowX:0,
-			transiting:false
+			transiting:false, // UL是否正在transition中
+			isStart:true // 判读是否正常拖拽
 		}
 	},
 	methods:{
@@ -52,39 +54,50 @@ export default{
 			this.ulWidth = (this.liLength)*this.slideWidth
 			this.moveX = -this.slideWidth
 			this.slideUl.style.transform = `translate(-${this.slideWidth}px,0)`
+			for(let i=0;i<this.liLength;i++){
+				this.xArr.push(-i*this.slideWidth)
+			}
 		},
 		mobile(){ //移动端事件
+			/**
+			 * 动画执行时不能拖拽
+			 */
 			this.slide.addEventListener('touchstart',e=>{
-				this.slideUl.style.transition = '.0s'
-				this.UlNowX = getStyle(this.slideUl,'transform')['translateX']
-				this.startX = e.touches[0].clientX
+				if(!this.transiting){
+					this.isStart = true
+					this.slideUl.style.transition = '.0s'
+					this.UlNowX = getStyle(this.slideUl,'transform')['translateX']
+					this.startX = e.touches[0].clientX
+				}
 				e.preventDefault()
 			})
 			this.slide.addEventListener('touchmove',e=>{
-				this.disX =  parseInt((e.touches[0].clientX - this.startX)*.4)
-				this.slideUl.style.transform = `translate(${(this.disX+this.UlNowX)}px,0)`
+				if(!this.transiting && this.isStart){ // 动画时不能拖拽，并且是正常点击触发，因为有可能动画结束时手指仍在拖动
+					this.disX =  parseInt((e.touches[0].clientX - this.startX)*.4)
+					this.slideUl.style.transform = `translate(${(this.disX+this.UlNowX)}px,0)`
+				}
 				e.preventDefault()
 			})
 			this.slide.addEventListener('touchend',e=>{
-				// 滑动幅度大则切换
-				if(Math.abs(this.disX) >= 30){
-					if(this.onOff){
+				if(!this.transiting){
+					this.transiting = true
+					this.isStart = false
+					if(Math.abs(this.disX) >= 30){ // 滑动幅度大则切换
 						this.disX > 0 ? this.moveLeft() : this.moveRight()
-					}else{ // 快速中断又拖拽
-						this.slideUl.style.transition = '.3s'
+					}else if(this.disX != 0){ // 小幅挪动回到原位	
+						this.slideUl.style.transition = '.2s'
 						this.slideUl.style.transform = `translate(${(this.moveX)}px,0)`
+					}else if(this.disX == 0 && this.xArr.includes(this.moveX)){ // 点击
+						this.transiting = false
 					}
-				}else if(this.disX != 0){ // 小幅挪动回到原位	
-					this.slideUl.style.transition = '.3s'
-					this.slideUl.style.transform = `translate(${(this.moveX)}px,0)`
+					this.disX = 0
 				}
-				this.disX = 0
 				e.preventDefault()
 			})
 		},
 		moveUL(index){
 			this.onOff = false
-			this.slideUl.style.transition = '.3s'
+			this.slideUl.style.transition = '.2s'
 			this.moveNum = index+1
 			this.roundNum = index
 			this.slideUl.style.transform = `translate(-${this.moveNum*this.slideWidth}px,0)`
@@ -92,7 +105,8 @@ export default{
 		moveLeft(){
 			if(this.onOff){
 				this.onOff = false
-				this.slideUl.style.transition = '.3s'
+				this.transiting = true
+				this.slideUl.style.transition = '.2s'
 				this.roundNum == 0 ? this.roundNum = this.sourceLength-1 : this.roundNum--
 				this.moveX = -(--this.moveNum * this.slideWidth)
 				this.slideUl.style.transform = `translate(${this.moveX}px,0)`
@@ -101,7 +115,8 @@ export default{
 		moveRight(){
 			if(this.onOff){
 				this.onOff = false
-				this.slideUl.style.transition = '.3s'
+				this.transiting = true
+				this.slideUl.style.transition = '.2s'
 				this.roundNum = this.moveNum%this.sourceLength
 				this.moveX = -(++this.moveNum * this.slideWidth)
 				this.slideUl.style.transform = `translate(${this.moveX}px,0)`
@@ -115,14 +130,17 @@ export default{
 					this.moveX = -(this.slideWidth*(this.sourceLength))
 					this.slideUl.style.transform = `translate(${this.moveX}px,0)`
 					this.onOff = true
+					this.transiting = false
 				}else if(this.moveNum == this.liLength-1){ // 到达第一张Loop位
 					this.slideUl.style.transition = '.0s'
 					this.moveNum = 1
 					this.moveX = -this.slideWidth
 					this.slideUl.style.transform = `translate(${this.moveX}px,0)`
 					this.onOff = true
+					this.transiting = false
 				}else{
 					this.onOff = true
+					this.transiting = false
 				}
 			})
 		}
