@@ -3,11 +3,11 @@
 		<ul class="x-slide-imgpage" :style="{width:ulWidth+'px'}">
 			<slot/>
 		</ul>
-		<div class="x-slide-arrowbtn">
-			<span class="left-arrow" @click="moveLeft">左</span>
-			<div class="rigth-arrow" @click="moveRight">右</div>
+		<div class="x-slide-arrowbtn" v-if="arrowShow">
+			<span class="left-arrow" @click="moveLeft"></span>
+			<div class="rigth-arrow" @click="moveRight"></div>
 		</div>
-		<ul class="x-slide-paginationbtn">
+		<ul class="x-slide-paginationbtn" v-if="paginationShow">
 			<li v-for="(item,index) in sourceLength" :class="[{'active':index==roundNum}]" @click="moveUL(index)"></li>
 		</ul>
 	</div>
@@ -37,6 +37,14 @@ export default{
 		intervalTime:{
 			type:Number,
 			default:3000
+		},
+		paginationShow:{
+			type:Boolean,
+			default:true
+		},
+		arrowShow:{
+			type:Boolean,
+			default:true
 		}
 	},
 	data(){
@@ -222,18 +230,23 @@ export default{
 	.x-slide-arrowbtn{
 		position: absolute;
 		width: 100%;
-		top:45%;
+		top:40%;
 		.left-arrow,.rigth-arrow{
 			position: absolute;
 			top:0;
-			width:20px;
-			background:#fff;
+			width:30px;
+			height:30px;
 		}
 		.left-arrow{
 			left:0;
+			background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzklEQVRYR+3W3Q3CMAwEYN8EdBRWYBPYgG5UJoGR2MAoUpDyUMA/l0ZC7XOq+2rFriGDHwzOlx3wXxVQ1QnA03OvaBVQ1aOI3EVkBrBYERRAEz7V4BOAhwWRBqyE3wCcLeHlTAqQDU8BGOFhACs8BGCGuwHscBegR7gZ0CvcCyiD5VD7ewFwsfb6t3PmOVCrQEeYAeUreiBcgB4IN4CNCAGYiDCAhUgBGIg04ANiu4XkPWSaFr1uvpI1iHFLaXQsU+5ANNz8M8oE/Hp3r8AL+VhsIRMtHZ8AAAAASUVORK5CYII=') no-repeat center center;
+			background-size:100% 100%;
 		}
 		.rigth-arrow{
 			right:0;
+			background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzklEQVRYR+3W3Q3CMAwEYN8EdBRWYBPYgG5UJoGR2MAoUpDyUMA/l0ZC7XOq+2rFriGDHwzOlx3wXxVQ1QnA03OvaBVQ1aOI3EVkBrBYERRAEz7V4BOAhwWRBqyE3wCcLeHlTAqQDU8BGOFhACs8BGCGuwHscBegR7gZ0CvcCyiD5VD7ewFwsfb6t3PmOVCrQEeYAeUreiBcgB4IN4CNCAGYiDCAhUgBGIg04ANiu4XkPWSaFr1uvpI1iHFLaXQsU+5ANNz8M8oE/Hp3r8AL+VhsIRMtHZ8AAAAASUVORK5CYII=') no-repeat center center;
+			background-size:100% 100%;
+			transform:rotate(180deg);
 		}
 	}
 	.x-slide-paginationbtn{
