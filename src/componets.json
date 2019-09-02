@@ -23,5 +23,7 @@
     "slideVerify":"./packages/SlideVerify/index.js",
     "switch":"./packages/Switch/index.js",
     "textarea":"./packages/Textarea/index.js",
-    "upload":"./packages/Upload/index.js"
+    "upload":"./packages/Upload/index.js",
+    "slide":"./packages/Slide/index.js",
+    "urlParams":"./packages/UrlParams/index.js"
 }
