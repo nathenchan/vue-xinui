@@ -36,7 +36,12 @@ const SlideText = {
 			]
 		}
 	}
-}`
+},
+	mounted(){
+		this.$refs.slide1.create()
+	}
+}
+`
 }
 
 export {SlideText}

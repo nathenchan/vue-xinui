@@ -6,7 +6,7 @@
 			<p class="tips">为了初始化成功，必须在css中声明.x-slide(轮播图父级)width和height及.content-li(列表子元素)的width</p>
 			<div class="show-page">
 				<div class="demo-page">
-					<x-slide transition-time=".2s">
+					<x-slide transition-time=".2s" ref="slide1">
 						<li class="content-li" v-for="(item,index) in imgData"><img :src="item.src"></li>
 					</x-slide>
 				</div>
@@ -65,6 +65,26 @@
 				</tbody>
 			</table>
 		</div>
+
+		<div class="api-pages">
+			<h3>Events</h3>
+			<table width="100%">
+				<thead>
+					<tr>
+						<td>方法名</td>
+						<td>回调参数</td>
+						<td>说明</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>create</td>
+						<td></td>
+						<td>初始化组件，必须调用</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </template>
 
@@ -96,6 +116,9 @@ export default{
 				}
 			]
 		}
+	},
+	mounted(){
+		this.$refs.slide1.create()
 	}
 }
 </script>

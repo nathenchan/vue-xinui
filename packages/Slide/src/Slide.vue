@@ -71,6 +71,13 @@ export default{
 		}
 	},
 	methods:{
+		create(){
+			this.init()
+			this.slideUlTransitionEnd()
+			if(this.autoPlay){this.autoLoop()}
+			// mobile event
+			this.mobile()
+		},
 		init(){
 			this.slide = this.$el
 			this.slideWidth = this.slide.offsetWidth
@@ -188,13 +195,6 @@ export default{
 				this.moveRight()
 			},this.intervalTime)
 		}
-	},
-	mounted(){
-		this.init()
-		this.slideUlTransitionEnd()
-		if(this.autoPlay){this.autoLoop()}
-		// mobile event
-		this.mobile()
 	}
 }
 </script>
