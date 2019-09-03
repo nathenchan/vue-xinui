@@ -4,7 +4,7 @@
 
 ## 文档与示例
 
-[Document]()
+[Document](https://nathenchan.github.io/vue-xinui/doc)
 
 ## 文件大小
 
