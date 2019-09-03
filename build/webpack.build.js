@@ -11,7 +11,7 @@ module.exports = {
   mode:'production', // development production
   entry,
   output:{
-    path: path.resolve(__dirname, '../lib'),
+    path: path.resolve(__dirname, '../dist'),
     filename: '[name].js',
     library: 'xinui', // 暴露库模块到全局
     libraryTarget: 'umd'
@@ -39,11 +39,11 @@ module.exports = {
     ]
   },
   plugins:[
-    new CleanWebpackPlugin(['lib'],{
+    new CleanWebpackPlugin(['dist'],{
       root: path.resolve(__dirname, '../')
     }),
     new MiniCssExtractPlugin({
-      filename: '../lib/styles/[name].css'
+      filename: '../dist/styles/[name].css'
     }),
     new VueLoaderPlugin()
   ]

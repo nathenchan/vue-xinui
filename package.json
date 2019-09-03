@@ -1,8 +1,8 @@
 {
   "name": "vue-xinui",
-  "version": "1.1.2",
+  "version": "1.1.4",
   "description": "",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "dev": "webpack-dev-server --config ./build/webpack.dev.js --host 0.0.0.0",
     "build": "webpack --config ./build/webpack.build.js",

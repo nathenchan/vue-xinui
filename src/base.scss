@@ -1,8 +1,5 @@
 // base styles
 /* fade */
-body{
-	color:#333;
-}
 .fade-enter-active, .fade-leave-active {
   transition: opacity .3s;
 }
@@ -31,4 +28,8 @@ body{
 }
 .float-r{
 	float: right;
+}
+
+button{
+	outline:none;
 }

@@ -66,5 +66,5 @@ if( typeof window !== undefined && window.Vue ){
 export default {
 	install,
 	author:'nathen',
-	version:'1.1.2'
+	version:'1.1.3'
 }

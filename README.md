@@ -1,71 +1,96 @@
-# XinUI
+# vue-xinui
 
-a vue.js 2.x UI component library for front page
+基于Vue2.x封装的组件库，主要面向前台页面。
 
-## Instruction
+## 文档与示例
 
-[Document](https://github.com/nathenchan/xinui/blob/master/README.md)
+[Document]()
 
-## File Size
+## 文件大小
 
-complete.js  gzip 1kb
+## 浏览器兼容情况
 
-complete.css gzip 1kb
-
-## Browser Support
-
-- IE11+
+- IE11
+- Edge
 - Chrome
 - FireFox
-- Edge
 - Safari
+- 其他现代浏览器
 
-## Install
-
-
+## 安装
 ```
 npm install vue-xinui
 ```
 
-## Usage
+## 相关文件
 
-Full import 
+完整样式
+[vue-xinui.css]()
+
+按需引入loader
+[babel_xinui_import.js]()
+
+## 使用
+
 ```
+// 完整引入
 import 'vue-xinui.css'
-
 import XinUI from 'vue-xinui'
 Vue.use(XinUI)
-```
-import components on demand
-```
-import 'base.css'
 
-import {Button} from 'vue-xinui' 
-Vue.use(Button)
+// 按需引入，首先需要配置一下webpack，开发和打包环境都需要
+const XinUILoader = path.resolve('./loader/babel_xinui_import.js')
+
+module: {
+	rules: [
+    	{
+			test: /\.js$/,
+			exclude: /node_modules/,
+			use: {
+				loader: XinUILoader
+			}
+	    }
+	]
+}
+
+// 项目入口文件，无需引入样式
+import {Button,Upload} from 'vue-xinui' 
+Vue.use(Button,Upload)
 ```
 
-## Components
+## 组件列表
 
+- Form 表单，包裹表单控件
+- Button 按钮
+- CheckboxGroup 多选组
+- Input 输入框
+- Option 下拉菜单
+- Switch 开关
+- Textarea 文本域
+- LocationSelect 省市区联动菜单
 - Dialog 弹窗
 - SlideVerify 拼图验证
 - Pagination 分页
 - Ring 圆环进度条
-- Image lazy load 图片懒加载
-- Form and verify：Input、Checkbox、Radio、Select、
-- File Upload 文件上传
+- Image 用于图片懒加载
+- Upload 文件上传
 - CountDown 倒计时
-- 省市区联动菜单
+- Slide 轮播图
 
-## Custom Directives
+## 自定义指令
 
 - Loading
 
-## Writing
+## 全局方法
 
-- url qurry
-- Date Methods
-- Images Slide
-- Mobile Custom Scroll
-- Mobile infinite load 
-- Mobile Pull load 
-- Sprite plugin Canvas
+- UrlParams 获取URL参数
+
+## 计划更新
+
+- 手机端底部无限加载
+- 手机端下拉刷新
+- 时间格式化
+
+## vue-xinui讨论群
+
+前端交流，欢迎入QQ群834877689

@@ -6139,7 +6139,7 @@ if( typeof window !== undefined && window.Vue ){
 /* harmony default export */ __webpack_exports__["default"] = ({
 	install,
 	author:'nathen',
-	version:'1.1.1'
+	version:'1.1.3'
 });
 
 /***/ })
