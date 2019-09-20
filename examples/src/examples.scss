@@ -1,0 +1,285 @@
+body, th, td, p, ol, ul, li, dl, dt, dd, a, h1, h2, h3, h4, h5, h6, form, fieldset, input, legend, select, textarea {
+  margin: 0;
+  padding: 0; font-size: 14px;  font-family: "Microsoft YaHei";}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 0; }
+
+input, img, fieldset {
+  border: none; }
+
+input, select, fieldset {
+  vertical-align: middle; }
+
+body, button, input, select, textarea {
+  outline: none; }
+
+ul, ol, nav li {
+  list-style-type: none; }
+
+a {
+  text-decoration: none;
+  outline: none; }
+
+a:link {
+  text-decoration: none; }
+
+a:hover {
+  text-decoration: none; }
+
+a:active {
+  text-decoration: none; }
+
+a:visited {
+  text-decoration: none; }
+
+i, cite, em, var, address, dfn {
+  font-style: normal; }
+
+input:-ms-clear {
+  display: none; }
+
+/* clear IE10 X */
+.clear:after {
+  content: "";
+  display: block;
+  height: 0;
+  clear: both;
+  line-height: 0;
+  visibility: hidden; }
+
+.tl {
+  text-align: left; }
+
+.tc {
+  text-align: center; }
+
+.tr {
+  text-align: right; }
+
+.bc {
+  margin: 0 auto; }
+
+.fl {
+  float: left; }
+
+.fr {
+  float: right; }
+
+.vm {
+  vertical-align: middle; }
+
+.pr {
+  position: relative; }
+
+.pa {
+  position: absolute; }
+
+.zoom {
+  zoom: 1; }
+
+.none {
+  display: none; }
+
+.block {
+  display: block; }
+
+.yahei {
+  font-family: "Microsoft YaHei"; }
+
+.f12 {
+  font-size: 12px; }
+
+.f13 {
+  font-size: 13px; }
+
+.f14 {
+  font-size: 14px; }
+
+.f16 {
+  font-size: 16px; }
+
+.f20 {
+  font-size: 20px; }
+
+.fb {
+  font-weight: bold; }
+
+.fn {
+  font-weight: normal; }
+
+.t2 {
+  text-indent: 2em; }
+
+.lastli{
+    margin-right: 0 !important;
+}
+
+/*inline-block*/
+.dib {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1; }
+
+/* ellipsis */
+.elli {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis; }
+[v-cloak] {
+  display: none;
+}
+
+a{
+  color:#333;
+}
+
+.demo-pages{
+  margin-top: 30px;
+  margin-bottom: 30px;
+  box-sizing: border-box;
+  &:first-of-type{
+    margin-top: 0;
+  }
+  &>.tips{
+    line-height: 28px;
+  }
+  h3{
+    margin-bottom: 20px;
+  }
+  .demo-btn-page,.demo-page{
+    &:first-of-type{
+      margin-top: 10px;
+    }
+    margin:20px;
+  }
+  .demo-page{
+    .texts{
+      line-height: 28px;
+    }
+  }
+  .show-page{
+    margin-top: 20px;
+    padding:16px;
+    border:1px solid #ebebeb;
+  }
+  .source-code{
+    border:1px solid #eaeaea;
+    border-top:none;
+    background-color: #fafafa;
+    overflow: hidden;
+  }
+  .code-tips{
+    margin:20px;
+    padding:10px;
+    background: #fff;
+    border:1px solid #eaeaea;
+    line-height: 26px;
+    color:#5e6d82;
+  }
+  .code-page{
+    padding:0 20px 0px;
+  }
+  .code-btn{
+    width:100%;
+    background:#fff;
+    border:none;
+    line-height: 30px;
+    cursor: pointer;
+    border-top:1px solid #eaeaea;
+    &.active{
+      border-top:none;
+    }
+    &:hover{
+      transition:.2s;
+      background: #607D8B;
+      color: #fff;
+    }
+  }
+}
+
+
+.api-pages{
+  margin-top: 40px;
+  margin-bottom: 40px;
+  h3{
+    margin-bottom: 10px;
+    color:#333;
+  }
+  table{
+    thead tr{
+      line-height: 50px;
+      border-bottom: 1px solid #eaeaea;
+    }
+    tbody tr{
+      line-height: 50px;
+      border-bottom: 1px solid #eaeaea;
+    }
+    td{
+      color:#606266;
+    }
+  }
+}
+
+#vue-xinui{
+  margin:0 auto;
+  width:90%;
+}
+
+header{
+  padding:26px 0px;
+  h1{
+    font-size: 24px;
+    color:#525252;
+  }
+}
+
+aside{
+  padding:0px 0 0 0px;
+  float: left;
+  width:200px;
+  box-sizing: border-box;
+  .nav-group-item{
+    font-weight: bold;
+    line-height: 28px;
+    a{
+      font-size: 16px;
+    }
+  }
+  .section-group{
+    margin-bottom: 30px;
+    &:first-of-type{
+      margin-top: 0;
+    }
+    h2{
+      font-size: 16px;
+    }
+    .title{
+      margin-top: 6px;
+      margin-bottom: 10px;
+      font-size: 12px;
+      color:#999;
+    }
+    li{
+      line-height: 28px;
+    }
+  }
+}
+
+main{
+  position: absolute;
+  left:300px;
+  right:0;
+  padding:0px 20px 0 0 ;
+  box-sizing: border-box;
+  h3{
+    font-weight: normal;
+    font-size: 20px;
+  }
+  .doc-text{
+    margin-bottom: 14px;
+  }
+}
