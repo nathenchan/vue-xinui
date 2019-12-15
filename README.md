@@ -2,6 +2,17 @@
 
 基于Vue2.x封装的组件库，主要面向前台页面。
 
+## 命令行
+
+```
+npm run dev // DEMO开发环境
+npm run build // 打包vue-xinui
+npm run docBuild // 文档页面打包
+npm run buildCss // 编译输出base.css 和 完整的vue-xinui.css
+npm run devTest // 使用vue-xinui测试
+npm run buildTest // 打包vue-xinui测试
+```
+
 ## 文档与示例
 
 [Document](https://nathenchan.github.io/vue-xinui/doc)
@@ -24,38 +35,52 @@ npm install vue-xinui
 
 ## 相关文件
 
-完整样式
-[vue-xinui.css](https://github.com/nathenchan/vue-xinui/blob/master/dist/styles/vue-xinui.css)
-
-按需引入loader
-[xinui_import.js](https://github.com/nathenchan/vue-xinui/blob/master/loader/xinui_import.js)
-
 ## 使用
 
 ```
 // 完整引入
-import 'vue-xinui.css'
+import 'vue-xinui/dist/styles/vue-xinui.css'
 import XinUI from 'vue-xinui'
 Vue.use(XinUI)
 
-// 按需引入，首先需要配置一下webpack，开发和打包环境都需要
-const XinUILoader = path.resolve('./loader/babel_xinui_import.js')
+// 按需引入
+import 'vue-xinui/dist/styles/base.css'
+import {Button,Dialog} from 'vue-xinui'
+Vue.use(Button)
+Vue.use(Dialog)
 
+// 按需引入还需要稍作对webpack配置
+// 开发dev配置
+module: {
+		rules: [
+			{
+			  test: /\.js$/,
+			  exclude: /(node_modules)/,
+			  use: {
+				  loader: 'babel-loader',
+				  options:{
+					plugins: ['babel-plugin-xinui-import']
+				  }
+			  }
+		  	}
+		]
+}
+// 打包prod配置
 module: {
 	rules: [
-    	{
+		{
 			test: /\.js$/,
-			exclude: /node_modules/,
+			exclude: /(node_modules)/,
 			use: {
-				loader: XinUILoader
+				loader: 'babel-loader',
+				options:{
+				presets: ['@babel/preset-env'],
+				plugins: ['babel-plugin-xinui-import']
+				}
 			}
-	    }
+		}
 	]
 }
-
-// 项目入口文件，无需引入样式
-import {Button,Upload} from 'vue-xinui' 
-Vue.use(Button,Upload)
 ```
 
 ## 组件列表
